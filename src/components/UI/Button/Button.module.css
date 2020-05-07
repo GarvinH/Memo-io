@@ -1,0 +1,12 @@
+.Button {
+    height: 100%;
+}
+
+.Button img {
+    height: 100%;
+    padding: 0.5rem;
+    margin: 0 1rem;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 2rem;
+}

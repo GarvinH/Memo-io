@@ -1,0 +1,6 @@
+.BulletinBoard {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 4rem);
+    background-color: #9c6f3e;
+}
