@@ -2,3 +2,16 @@
     position: absolute;
     border: 2px solid black;
 }
+
+.closeButton {
+    display: inline-block;
+    position: absolute;
+    right: 0.5rem;
+    font-size: xx-large;
+    color: rgba(119, 136, 153, 0.5);
+}
+
+.closeButton:hover,
+.closeButton:active {
+    color:lightslategray;
+}

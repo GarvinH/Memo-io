@@ -15,13 +15,19 @@ class App extends Component {
     this.setState({ notes: notes });
   }
 
+  deleteNote = (index) => {
+    let notes = [...this.state.notes];
+    notes.splice(index, 1);
+    this.setState({notes: notes});
+  }
+
   render() {
     return (
       <ButtonContext.Provider value={{
         addNote: this.addNewNote,
       }}>
         <Layout>
-          <BulletinBoard notes={this.state.notes} />
+          <BulletinBoard notes={this.state.notes} delete={this.deleteNote}/>
         </Layout>
       </ButtonContext.Provider>
     );
