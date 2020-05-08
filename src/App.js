@@ -37,6 +37,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("app render")
     return (
       <ButtonContext.Provider value={{
         addNote: this.addNewNote,
