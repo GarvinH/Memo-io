@@ -13,15 +13,12 @@ const note = (props) => (
         minHeight: 100,
         minWidth: 100
     }}
-    className={classes.Note}
-    style={{ backgroundColor: props.color }}>
+        className={classes.Note}
+        style={{ backgroundColor: props.color }}>
+        {props.text}
+        <div onClick={props.delete} className={classes.closeButton}><span role="img" aria-label="close button">&#10060;</span></div>
         <div>
-            {props.text}
-            asdf
-            <div onClick={props.delete} className={classes.closeButton}><span role="img" aria-label="close button">&#10060;</span></div>
-            <div>
-                <Resize className={classes.resizeButton} />
-            </div>
+            <Resize className={classes.resizeButton} />
         </div>
     </Rnd>
 )
