@@ -1,17 +1,29 @@
 import React from 'react';
 import classes from './Note.module.css'
+import { Rnd } from 'react-rnd'
 
 import { ReactComponent as Resize } from '../../assets/resize.svg'
 
 const note = (props) => (
-    <div className={classes.Note}
-        style={{ left: props.left, top: props.top, width: props.width + "px", height: props.height + "px", backgroundColor: props.color }}>
-        {props.text}
-        <div onClick={props.delete} className={classes.closeButton}><span role="img" aria-label="close button">&#10060;</span></div>
-        <div draggable onDrag={props.resize}>
-            <Resize className={classes.resizeButton} />
+    <Rnd default={{
+        x: 200,
+        y: 200,
+        width: 200,
+        height: 200,
+        minHeight: 100,
+        minWidth: 100
+    }}
+    className={classes.Note}
+    style={{ backgroundColor: props.color }}>
+        <div>
+            {props.text}
+            asdf
+            <div onClick={props.delete} className={classes.closeButton}><span role="img" aria-label="close button">&#10060;</span></div>
+            <div>
+                <Resize className={classes.resizeButton} />
+            </div>
         </div>
-    </div>
+    </Rnd>
 )
 
 export default note;
