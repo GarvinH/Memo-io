@@ -15,3 +15,21 @@
 .closeButton:active {
     color:lightslategray;
 }
+
+.resizeButton {
+    display: inline-block;
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    right: 0;
+    bottom: 0;   
+}
+
+.resizeButton path {
+    stroke: rgba(119, 136, 153, 0.5) !important;
+}
+
+.resizeButton:hover path,
+.resizeButton:active path{
+    stroke: lightslategray !important;
+}
