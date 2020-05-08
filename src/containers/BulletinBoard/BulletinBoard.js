@@ -5,7 +5,7 @@ import Note from '../../components/Note/Note'
 const bulletinBoard = (props) => {
 
     const notes = props.notes.map((note, index) => {
-        return <Note color={note.color} text={note.text}
+        return <Note key={note.iden} color={note.color} text={note.text}
             delete={() => props.delete(index)}></Note>
     })
 

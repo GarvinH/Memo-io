@@ -6,12 +6,13 @@ import ButtonContext from './context/ButtonContext'
 class App extends Component {
   state = {
     currentColor: "yellow",
+    currentID: 1,
     notes: [],
   }
 
   addNewNote = () => {
     let notes = [...this.state.notes];
-    notes.push({ left: 200, top: 200 + notes.length * 250, width: 200, height: 200, color: "yellow", text:""});
+    notes.push({color: "yellow", text:"", iden: this.state.currentID});
     this.setState({ notes: notes });
   }
 
