@@ -4,12 +4,9 @@ import { Rnd } from 'react-rnd'
 
 import { ReactComponent as Resize } from '../../assets/resize.svg'
 
-import NoteContext from '../../context/NoteContext'
-
 const Note = (props) => {
     
     const noteRef = useRef(null)
-    const noteContext = React.useContext(NoteContext);
 
     return (
     
@@ -18,23 +15,20 @@ const Note = (props) => {
         y: 200,
         width: 200,
         height: 200,
-        minHeight: 100,
-        minWidth: 100
+        minHeight: 200,
+        minWidth: 200
     }}
         className={classes.Note}
-        style={{ backgroundColor: props.color}}
+        style={{ backgroundColor: props.color, zIndex: props.zIndex}}
         onResize={(event, dir, ref)=> {
-            if (parseInt(ref.style.width) < 100) {
-                ref.style.width = "100px";
+            if (parseInt(ref.style.width) < 200) {
+                ref.style.width = "200px";
             }
-            if (parseInt(ref.style.height) < 100) {
-                ref.style.height = "100px";
+            if (parseInt(ref.style.height) < 200) {
+                ref.style.height = "200px";
             }
         }}
-        onDragStart={(event, data) => {
-            data.node.style.zIndex = noteContext.zIndex;
-            noteContext.updateZIndex();
-        }} 
+        onDragStart={props.updateZ}
         onClick={() => {
             noteRef.current.focus()
         }}>

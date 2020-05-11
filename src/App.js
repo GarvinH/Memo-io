@@ -8,12 +8,12 @@ class App extends Component {
     currentColor: "yellow",
     currentID: 1,
     currentZIndex: 0,
-    notes: [{ color: "yellow", text: "s", iden: 2}, { color: "yellow", text: "d", iden: 3}],
+    notes: [],
   }
 
   addNewNote = () => {
     let notes = [...this.state.notes];
-    notes.push({ color: "yellow", text: "", iden: this.state.currentID});
+    notes.push({ color: "yellow", text: "", iden: this.state.currentID, zIndex: this.state.currentZIndex});
     this.setState((prevState) => { 
       return { notes: notes,
       currentID: prevState.currentID+1,
@@ -26,9 +26,12 @@ class App extends Component {
     this.setState({ notes: notes });
   }
 
-  updateZIndex = () => {
+  updateZIndex = (index) => {
+    let notes = [...this.state.notes];
+    let note = notes[index];
+    note.zIndex = this.state.currentZIndex;
     let newZIndex = this.state.currentZIndex+1;
-    this.setState({currentZIndex: newZIndex})
+    this.setState({notes: notes, currentZIndex: newZIndex})
   }
 
   updateText = (event, index) => {
@@ -46,7 +49,7 @@ class App extends Component {
         updateZIndex: this.updateZIndex,
       }}>
         <Layout>
-          <BulletinBoard notes={this.state.notes} delete={this.deleteNote} resize={this.resizeNote} changed={this.updateText}/>
+          <BulletinBoard notes={this.state.notes} delete={this.deleteNote} resize={this.resizeNote} changed={this.updateText} updateZ={this.updateZIndex}/>
         </Layout>
       </ButtonContext.Provider>
     );
