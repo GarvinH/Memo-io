@@ -7,7 +7,7 @@ import Button from '../../UI/Button/Button'
 import plus from '../../../assets/plus.png'
 import pallete from '../../../assets/pallete.png'
 
-import ButtonContext from '../../../context/ButtonContext'
+import NoteContext from '../../../context/NoteContext'
 import Aux from '../../../hoc/Aux'
 
 const navBar = (props) => {
@@ -19,14 +19,14 @@ const navBar = (props) => {
                 <h1>Memo.io</h1>
             </div>
             <div className={classes.Button}>
-                <ButtonContext.Consumer>
-                    {(buttonContext) => (
+                <NoteContext.Consumer>
+                    {(noteContext) => (
                         <Aux>
-                            <Button image={plus} alt="plus" clicked={buttonContext.addNote} />
+                            <Button image={plus} alt="plus" clicked={noteContext.addNote} />
                             <Button image={pallete} alt="pallete" />
                         </Aux>)
                     }
-                </ButtonContext.Consumer>
+                </NoteContext.Consumer>
             </div>
             <nav>
                 <NavItems />
