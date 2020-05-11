@@ -6,7 +6,7 @@ const bulletinBoard = (props) => {
 
     const notes = props.notes.map((note, index) => {
         return <Note key={note.iden} color={note.color} text={note.text}
-            delete={() => props.delete(index)}></Note>
+            delete={() => props.delete(index)} changed={(event) => props.changed(event, index)}></Note>
     })
 
     return (

@@ -31,6 +31,13 @@ class App extends Component {
     this.setState({currentZIndex: newZIndex})
   }
 
+  updateText = (event, index) => {
+    let notes = [...this.state.notes];
+    let note = notes[index];
+    note.text = event.target.value;
+    this.setState({notes: notes})
+  }
+
   render() {
     return (
       <ButtonContext.Provider value={{
@@ -39,7 +46,7 @@ class App extends Component {
         updateZIndex: this.updateZIndex,
       }}>
         <Layout>
-          <BulletinBoard notes={this.state.notes} delete={this.deleteNote} resize={this.resizeNote}/>
+          <BulletinBoard notes={this.state.notes} delete={this.deleteNote} resize={this.resizeNote} changed={this.updateText}/>
         </Layout>
       </ButtonContext.Provider>
     );

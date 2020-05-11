@@ -3,12 +3,23 @@
     border: 2px solid black;
 }
 
+.input, .input:focus {
+    border: transparent;
+    outline: none;
+    margin: 1rem;
+    width: calc(100% - 3rem);
+    height: calc(100% - 2.1rem);
+    overflow: hidden;
+    resize: none;
+}
+
 .closeButton {
-    display: inline-block;
     position: absolute;
+    top: 0;
     right: 0.5rem;
     font-size: xx-large;
     color: rgba(119, 136, 153, 0.5);
+    float: right;
 }
 
 .closeButton:hover,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import classes from './Note.module.css'
 import { Rnd } from 'react-rnd'
 
@@ -8,6 +8,7 @@ import NoteContext from '../../context/NoteContext'
 
 const Note = (props) => {
     
+    const noteRef = useRef(null)
     const noteContext = React.useContext(NoteContext);
 
     return (
@@ -33,8 +34,18 @@ const Note = (props) => {
         onDragStart={(event, data) => {
             data.node.style.zIndex = noteContext.zIndex;
             noteContext.updateZIndex();
+        }} 
+        onClick={() => {
+            noteRef.current.focus()
         }}>
-        {props.text}
+        <textarea type="text" ref={noteRef} value={props.text}
+        style={{backgroundColor: props.color}}
+        className={classes.input}
+        onChange={props.changed} onMouseUp={() => {
+            noteRef.current.blur()
+            noteRef.current.focus()
+        }
+        }></textarea>
         <div onClick={props.delete} className={classes.closeButton}><span role="img" aria-label="close button">&#10060;</span></div>
         <div>
             <Resize className={classes.resizeButton} />
