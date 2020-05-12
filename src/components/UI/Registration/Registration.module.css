@@ -1,0 +1,57 @@
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(20% - 2px);
+    height: 100%;
+    margin: 0;
+    float: left;
+}
+
+hr {
+    height: 100%;
+    width: 0px;
+    margin: 0;
+    float: left;    
+}
+
+.signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    float: left;
+    height: 100%;
+    flex-flow: column;
+}
+
+.signup input,
+.signup label {
+    font-size: large;
+}
+
+.signup input {
+    padding: 1rem;
+    margin: 1rem;   
+    border-radius: 5px;
+    border: 2px gray solid;
+    width: 70%;
+}
+
+input[type=submit] {
+    margin: 1rem;   
+    border-radius: 5px;
+    border: 2px gray solid;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 40%;
+    height: 10%;
+    left: calc(60% - 20% - 1rem);
+    top: calc(80% - 5%);
+    background-color: #28a745;
+    color: white;
+    border: none;
+}

@@ -3,7 +3,9 @@ import Layout from './components/Layout/Layout'
 import BulletinBoard from './containers/BulletinBoard/BulletinBoard'
 import ButtonContext from './context/NoteContext'
 import Modal from './components/UI/Modal/Modal'
+
 import Login from './components/UI/Login/Login'
+import Registration from './components/UI/Registration/Registration'
 
 class App extends Component {
   state = {
@@ -52,7 +54,7 @@ class App extends Component {
       }}>
         <Layout>
           <Modal style={{zIndex: this.state.currentZIndex+100}}>
-            <Login></Login>
+            <Registration/>
           </Modal>
           <BulletinBoard notes={this.state.notes} delete={this.deleteNote} resize={this.resizeNote} changed={this.updateText} updateZ={this.updateZIndex}/>
         </Layout>
