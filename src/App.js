@@ -6,6 +6,7 @@ import Modal from './components/UI/Modal/Modal'
 
 import Login from './components/UI/Login/Login'
 import Registration from './components/UI/Registration/Registration'
+import ChooseColor from './components/UI/ChooseColor/ChooseColor'
 
 class App extends Component {
   state = {
@@ -17,7 +18,7 @@ class App extends Component {
 
   addNewNote = () => {
     let notes = [...this.state.notes];
-    notes.push({ color: "yellow", text: "", iden: this.state.currentID, zIndex: this.state.currentZIndex});
+    notes.push({ color: this.state.currentColor, text: "", iden: this.state.currentID, zIndex: this.state.currentZIndex});
     this.setState((prevState) => { 
       return { notes: notes,
       currentID: prevState.currentID+1,
@@ -45,16 +46,21 @@ class App extends Component {
     this.setState({notes: notes})
   }
 
+  changeColor = (color) => {
+    this.setState({currentColor: color})
+  }
+
   render() {
     return (
       <ButtonContext.Provider value={{
         addNote: this.addNewNote,
+        changeColor: this.changeColor,
         zIndex: this.state.currentZIndex,
         updateZIndex: this.updateZIndex,
       }}>
         <Layout>
           <Modal style={{zIndex: this.state.currentZIndex+100}}>
-            <Registration/>
+            <ChooseColor currentColor={this.state.currentColor}/>
           </Modal>
           <BulletinBoard notes={this.state.notes} delete={this.deleteNote} resize={this.resizeNote} changed={this.updateText} updateZ={this.updateZIndex}/>
         </Layout>
