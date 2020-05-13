@@ -1,0 +1,13 @@
+.closeButton {
+    position: absolute;
+    top: 0;
+    right: 0.5rem;
+    font-size: xx-large;
+    color: rgba(119, 136, 153, 0.5);
+    float: right;
+}
+
+.closeButton:hover,
+.closeButton:active {
+    color:lightslategray;
+}
