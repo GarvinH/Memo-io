@@ -23,7 +23,7 @@ const navBar = (props) => {
                     {(noteContext) => (
                         <Aux>
                             <Button image={plus} alt="plus" clicked={noteContext.addNote} />
-                            <Button image={pallete} alt="pallete" />
+                            <Button image={pallete} alt="pallete" clicked={()=>noteContext.updateModal(3)}/>
                         </Aux>)
                     }
                 </NoteContext.Consumer>

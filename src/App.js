@@ -14,6 +14,7 @@ class App extends Component {
     currentID: 1,
     currentZIndex: 0,
     notes: [],
+    modalState: 1 ,//0 nothing, 1 login, 2 registration, 3 color chooser
   }
 
   addNewNote = () => {
@@ -50,17 +51,37 @@ class App extends Component {
     this.setState({currentColor: color})
   }
 
+  updateModalState = (newState) => {
+    this.setState({modalState: newState})
+  }
+
   render() {
+    let modalOutput = null;
+    switch (this.state.modalState) {
+      case (1):
+        modalOutput = <Login />
+        break;
+      case (2):
+        modalOutput = <Registration />
+        break;
+      case (3):
+        modalOutput = <ChooseColor currentColor={this.state.currentColor}/>
+        break;
+      default:
+        break;
+    }
+
     return (
       <ButtonContext.Provider value={{
         addNote: this.addNewNote,
         changeColor: this.changeColor,
         zIndex: this.state.currentZIndex,
         updateZIndex: this.updateZIndex,
+        updateModal: this.updateModalState,
       }}>
         <Layout>
-          <Modal style={{zIndex: this.state.currentZIndex+100}}>
-            <ChooseColor currentColor={this.state.currentColor}/>
+          <Modal show={this.state.modalState} style={{zIndex: this.state.currentZIndex+100}} updateModal={this.updateModalState}>
+            {modalOutput}
           </Modal>
           <BulletinBoard notes={this.state.notes} delete={this.deleteNote} resize={this.resizeNote} changed={this.updateText} updateZ={this.updateZIndex}/>
         </Layout>

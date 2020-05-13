@@ -18,7 +18,7 @@ const registsration = (props) => (
             <label>Confirm Password:</label>
             <input type="password" placeholder="Confirm your password here"></input>
         </form>
-        <input type="submit" value="Submit"></input>
+        <input className={classes.submit} type="submit" value="Submit"></input>
     </Aux>
 )
 

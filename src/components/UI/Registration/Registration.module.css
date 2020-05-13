@@ -38,11 +38,10 @@ hr {
     width: 70%;
 }
 
-input[type=submit] {
+.submit {
     margin: 1rem;   
     border-radius: 5px;
     border: 2px gray solid;
-    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;

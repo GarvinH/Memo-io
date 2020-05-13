@@ -9,4 +9,5 @@
     border: 3px lightgrey solid;
     box-sizing: border-box;
     box-shadow: 4px 4px 4px black;
+    transition: transform 0.3s ease-out;
 }

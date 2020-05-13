@@ -4,3 +4,8 @@
     height: auto;
     padding-top: 10%;
 }
+
+.color:hover {
+    width: 11%;
+    padding-top: 11%;
+}

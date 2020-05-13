@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NavItem from './NavItem/NavItem'
 import classes from './NavItems.module.css'
+import NoteContext from '../../../../context/NoteContext'
 
-const navItems = (props) => (
+const NavItems = (props) => {
+    const noteContext = useContext(NoteContext)
+
+    return (
     <ul className={classes.NavItems}>
-        <NavItem>LOGIN</NavItem>
-        <NavItem>SIGN UP</NavItem>
+        <NavItem clicked={()=>noteContext.updateModal(1)}>LOGIN</NavItem>
+        <NavItem clicked={()=>noteContext.updateModal(2)}>SIGN UP</NavItem>
     </ul>
-)
+)}
 
-export default navItems;
+export default NavItems;
