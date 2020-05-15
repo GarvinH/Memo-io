@@ -10,12 +10,12 @@ const chooseColor = (props) => (
     <Aux>
         <div className={classes.colorContainer}>
             {COLORS_TOP.map((color) => {
-                return <Color active={props.currentColor===color} color={color} />
+                return <Color key={color} active={props.currentColor===color} color={color} />
             })}
         </div>
         <div className={classes.colorContainer}>
             {COLORS_BOTTOM.map((color) => {
-                return <Color active={props.currentColor===color} color={color} />
+                return <Color key={color} active={props.currentColor===color} color={color} />
             })}
         </div>
     </Aux>

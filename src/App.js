@@ -55,21 +55,21 @@ class App extends Component {
     this.setState({modalState: newState})
   }
 
-  render() {
-    let modalOutput = null;
+  modalSelector = () => {
     switch (this.state.modalState) {
       case (1):
-        modalOutput = <Login />
-        break;
+        return <Login />
       case (2):
-        modalOutput = <Registration />
-        break;
+        return <Registration />
       case (3):
-        modalOutput = <ChooseColor currentColor={this.state.currentColor}/>
-        break;
+        return <ChooseColor currentColor={this.state.currentColor}/>
       default:
-        break;
+        return null
     }
+  }
+
+  render() {
+    const modalOutput = this.modalSelector()
 
     return (
       <ButtonContext.Provider value={{
