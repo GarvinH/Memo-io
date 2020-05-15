@@ -11,6 +11,25 @@ import ChooseColor from './components/UI/ChooseColor/ChooseColor'
 class App extends Component {
   state = {
     currentColor: "yellow",
+    /* RE: default value of "yellow"
+      There's an implicit coupling here between this default value and the colour options available in ChooseColor.js.
+      It wouldn't be a major bug, but it would be weird if the colour options in ChooseColor.js were updated to no longer
+      include yellow, or if someone later edited this default a new colour and didn't remember to also add it to ChooseColor.js.
+
+      I'd recommend making pulling the full set of colour options up in to this file (named, for example, COLOUR_OPTIONS). 
+      The default currentColor could be COLOUR_OPTIONS[0], and ChooseColor would accept an array of options along side the current
+      selection. 
+      There's a caveat to this suggestion in how ChooseColor is written, I've added a comment there (in the same commit as this one,
+      if this becomes ambiguous later) addressing that.
+
+      This would make COLOUR_OPTIONS the "single source of truth" for note colours, and the coupling between this file and
+      ChooseColor would now only go in one direction. Makes future colour option updates safer, AND makes ChooseColor more 
+      flexible for reuse.
+
+      Relevant concepts:
+        - Single source of truth: https://en.wikipedia.org/wiki/Single_source_of_truth
+        - DRY: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
+    */
     currentID: 1,
     currentZIndex: 0,
     notes: [],
