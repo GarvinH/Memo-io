@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/StickyNotes/static/css/main.74b5895f.chunk.css",
-    "main.js": "/StickyNotes/static/js/main.e8b987ae.chunk.js",
-    "main.js.map": "/StickyNotes/static/js/main.e8b987ae.chunk.js.map",
+    "main.js": "/StickyNotes/static/js/main.0bea057c.chunk.js",
+    "main.js.map": "/StickyNotes/static/js/main.0bea057c.chunk.js.map",
     "runtime-main.js": "/StickyNotes/static/js/runtime-main.647d1972.js",
     "runtime-main.js.map": "/StickyNotes/static/js/runtime-main.647d1972.js.map",
     "static/js/2.85dc9106.chunk.js": "/StickyNotes/static/js/2.85dc9106.chunk.js",
     "static/js/2.85dc9106.chunk.js.map": "/StickyNotes/static/js/2.85dc9106.chunk.js.map",
     "index.html": "/StickyNotes/index.html",
-    "precache-manifest.db9f59c5d84f60af27d2a29292d12807.js": "/StickyNotes/precache-manifest.db9f59c5d84f60af27d2a29292d12807.js",
+    "precache-manifest.8964d5b661b0ba2cd97405fde849fdb5.js": "/StickyNotes/precache-manifest.8964d5b661b0ba2cd97405fde849fdb5.js",
     "service-worker.js": "/StickyNotes/service-worker.js",
     "static/css/main.74b5895f.chunk.css.map": "/StickyNotes/static/css/main.74b5895f.chunk.css.map",
     "static/js/2.85dc9106.chunk.js.LICENSE.txt": "/StickyNotes/static/js/2.85dc9106.chunk.js.LICENSE.txt",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.647d1972.js",
     "static/js/2.85dc9106.chunk.js",
     "static/css/main.74b5895f.chunk.css",
-    "static/js/main.e8b987ae.chunk.js"
+    "static/js/main.0bea057c.chunk.js"
   ]
 }
