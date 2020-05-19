@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from './components/Layout/Layout'
-import BulletinBoard from './containers/BulletinBoard/BulletinBoard'
+import BulletinBoard from './components/BulletinBoard/BulletinBoard'
 import ButtonContext from './context/NoteContext'
 import Modal from './components/UI/Modal/Modal'
 

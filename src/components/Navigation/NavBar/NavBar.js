@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './NavBar.module.css'
 import NavItems from './NavItems/NavItems'
 import Logo from '../../UI/Logo/Logo'
@@ -10,29 +10,27 @@ import pallete from '../../../assets/pallete.png'
 import NoteContext from '../../../context/NoteContext'
 import Aux from '../../../hoc/Aux'
 
-const navBar = (props) => {
+const NavBar = (props) => {
+
+    const noteContext = useContext(NoteContext)
 
     return (
-        <header className={classes.NavBar}>
+        <header className={classes.NavBar} style={{zIndex: noteContext.zIndex+2}}>
             <div className={classes.Logo}>
                 <Logo />
                 <h1>Memo.io</h1>
             </div>
             <div className={classes.Button}>
-                <NoteContext.Consumer>
-                    {(noteContext) => (
-                        <Aux>
-                            <Button image={plus} alt="plus" clicked={noteContext.addNote} />
-                            <Button image={pallete} alt="pallete" clicked={()=>noteContext.updateModal(3)}/>
-                        </Aux>)
-                    }
-                </NoteContext.Consumer>
+                <Aux>
+                    <Button image={plus} alt="plus" clicked={noteContext.addNote} />
+                    <Button image={pallete} alt="pallete" clicked={() => noteContext.updateModal(3)} />
+                </Aux>
             </div>
             <nav>
                 <NavItems />
             </nav>
-        </header>
+        </header >
     )
 }
 
-export default navBar;
+export default NavBar;

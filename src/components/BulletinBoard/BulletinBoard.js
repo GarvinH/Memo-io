@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './BulletinBoard.module.css';
-import Note from '../../components/Note/Note'
+import Note from '../Note/Note'
 
 const bulletinBoard = (props) => {
 
