@@ -8,9 +8,12 @@ import Login from './components/UI/Login/Login'
 import Registration from './components/UI/Registration/Registration'
 import ChooseColor from './components/UI/ChooseColor/ChooseColor'
 
+const COLOR_OPTIONS = ["yellow", "#ff7eb9", "#7afcff", "#dcff46", "#fbad4b"];
+
 class App extends Component {
+
   state = {
-    currentColor: "yellow",
+    currentColor: COLOR_OPTIONS[0],
     currentID: 1,
     currentZIndex: 0,
     notes: [],
@@ -62,7 +65,7 @@ class App extends Component {
       case (2):
         return <Registration />
       case (3):
-        return <ChooseColor currentColor={this.state.currentColor}/>
+        return <ChooseColor currentColor={this.state.currentColor} colorOptions={COLOR_OPTIONS}/>
       default:
         return null
     }

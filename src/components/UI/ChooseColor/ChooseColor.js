@@ -3,22 +3,24 @@ import Aux from '../../../hoc/Aux'
 import classes from './ChooseColor.module.css'
 import Color from './Color/Color'
 
-const COLORS_TOP = ["yellow", "#ff7eb9", "#7afcff"];
-const COLORS_BOTTOM = ["#dcff46", "#fbad4b"];
+const chooseColor = (props) => {
+    const COLORS_TOP = props.colorOptions.slice(0, Math.ceil(props.colorOptions.length/2))
+    const COLORS_BOTTOM = props.colorOptions.slice(Math.ceil(props.colorOptions.length/2), props.colorOptions.length)
 
-const chooseColor = (props) => (
-    <Aux>
-        <div className={classes.colorContainer}>
-            {COLORS_TOP.map((color) => {
-                return <Color key={color} active={props.currentColor===color} color={color} />
-            })}
-        </div>
-        <div className={classes.colorContainer}>
-            {COLORS_BOTTOM.map((color) => {
-                return <Color key={color} active={props.currentColor===color} color={color} />
-            })}
-        </div>
-    </Aux>
-)
+    return (
+        <Aux>
+            <div className={classes.colorContainer}>
+                {COLORS_TOP.map((color) => {
+                    return <Color key={color} active={props.currentColor === color} color={color} />
+                })}
+            </div>
+            <div className={classes.colorContainer}>
+                {COLORS_BOTTOM.map((color) => {
+                    return <Color key={color} active={props.currentColor === color} color={color} />
+                })}
+            </div>
+        </Aux>
+    )
+}
 
 export default chooseColor
