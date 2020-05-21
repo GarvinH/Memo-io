@@ -1,10 +1,10 @@
 import React from 'react';
-import classes from './Button.module.css'
+import classes from './ImageButton.module.css'
 
-const button = (props) => (
+const imageButton = (props) => (
     <div className={classes.Button}>
         <img src={props.image} alt={props.alt} onClick={props.clicked} />
     </div>
 )
 
-export default button;
+export default imageButton;

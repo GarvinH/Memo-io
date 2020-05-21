@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import classes from './Note.module.css'
 import { Rnd } from 'react-rnd'
-import CloseButton from '../UI/Button/CloseButton/CloseButton'
+import CloseButton from '../UI/Button/EmojiButton/CloseButton/CloseButton'
 
 import { ReactComponent as Resize } from '../../assets/resize.svg'
 
@@ -61,7 +61,9 @@ const Note = (props) => {
                     textRef.current.focus()
                 }
                 }></textarea>
-            <CloseButton clicked={props.delete} />
+            <div className={classes.closeButton}>
+                <CloseButton clicked={props.delete} />
+            </div>
             <Resize className={classes.resizeButton} />
         </Rnd>
     )

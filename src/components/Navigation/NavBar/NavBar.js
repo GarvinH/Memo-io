@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import classes from './NavBar.module.css'
 import NavItems from './NavItems/NavItems'
 import Logo from '../../UI/Logo/Logo'
-import Button from '../../UI/Button/Button'
+import ImageButton from '../../UI/Button/ImageButton/ImageButton'
 
 import plus from '../../../assets/plus.png'
 import pallete from '../../../assets/pallete.png'
@@ -22,8 +22,8 @@ const NavBar = (props) => {
             </div>
             <div className={classes.Button}>
                 <Aux>
-                    <Button image={plus} alt="plus" clicked={noteContext.addNote} />
-                    <Button image={pallete} alt="pallete" clicked={() => noteContext.updateModal(3)} />
+                    <ImageButton image={plus} alt="plus" clicked={noteContext.addNote} />
+                    <ImageButton image={pallete} alt="pallete" clicked={() => noteContext.updateModal(3)} />
                 </Aux>
             </div>
             <nav>
