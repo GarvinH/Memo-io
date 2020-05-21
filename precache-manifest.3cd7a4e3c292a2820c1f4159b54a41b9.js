@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4bf9b59f214b4c8ba449a08f8b212009",
+    "revision": "4dfec5d17f0bb3f239953adc8c308828",
     "url": "/StickyNotes/index.html"
   },
   {
-    "revision": "c9cf09dd0dcf614932a6",
-    "url": "/StickyNotes/static/css/main.06759b56.chunk.css"
+    "revision": "2c7c638d7f4263cbbde9",
+    "url": "/StickyNotes/static/css/main.3631a7ce.chunk.css"
   },
   {
-    "revision": "64381697cabf4f29ee55",
-    "url": "/StickyNotes/static/js/2.85dc9106.chunk.js"
+    "revision": "d21786cad3035d41a690",
+    "url": "/StickyNotes/static/js/2.6331c094.chunk.js"
   },
   {
     "revision": "e1ebcee444532ceab7d2a4a1c7007bba",
-    "url": "/StickyNotes/static/js/2.85dc9106.chunk.js.LICENSE.txt"
+    "url": "/StickyNotes/static/js/2.6331c094.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c9cf09dd0dcf614932a6",
-    "url": "/StickyNotes/static/js/main.16bfeea5.chunk.js"
+    "revision": "2c7c638d7f4263cbbde9",
+    "url": "/StickyNotes/static/js/main.b40d2b6a.chunk.js"
   },
   {
     "revision": "fe8c8ac82811a44c83d3",
