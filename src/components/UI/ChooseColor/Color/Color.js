@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import classes from './Color.module.css'
 import NoteContext from '../../../../context/NoteContext'
+import PropTypes from 'prop-types'
 
 const Color = (props) => {
     const noteContext = useContext(NoteContext);
@@ -11,6 +12,11 @@ const Color = (props) => {
         noteContext.changeColor(props.color)
     }}>
     </div>)
+}
+
+Color.propTypes = {
+    active: PropTypes.bool.isRequired,
+    color: PropTypes.string.isRequired,
 }
 
 export default Color;

@@ -3,6 +3,7 @@ import classes from './Modal.module.css'
 import Backdrop from '../Backdrop/Backdrop'
 import Aux from '../../../hoc/Aux'
 import CloseButton from '../Button/EmojiButton/CloseButton/CloseButton'
+import PropTypes from 'prop-types'
 
 class Modal extends Component {
 
@@ -23,6 +24,11 @@ class Modal extends Component {
             </Aux>
         )
     }
+}
+
+Modal.propTypes = {
+    show: PropTypes.bool.isRequired,
+    style: PropTypes.object,
 }
 
 export default Modal;
