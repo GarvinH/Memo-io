@@ -39,6 +39,16 @@ const logo = (props) => (
             - ... there's a lot to learn about it, expect it to come up often. I'm going to make a couple more commits with a11y
             specific comments after this one
         */}
+        {/* RE: alternate a11y consideration
+          Small note, but you can hide content from screen reader users with the attribute `aria-hidden="true"`. It's often more
+          suitable to just hide something like a logo altogether, rather than describe it, since it's usually a redundant to some
+          actual on-screen text and only there for visual design purposes.
+          
+          Want to know what "aria" means? Ask me in the PR, but heads up that it's going to be an excuse for me to talk about 
+          specifications, web standards, and the groups that write the specifications and standards for the web. On one hand, it's
+          worth knowing at least vaguely how things like HTML are standardized and advanced, on the other hand the groups and
+          specifications involved all have really long, kind of boring names, haha.
+        */}
     </div>
 )
 
