@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './BulletinBoard.module.css';
 import Note from '../Note/Note'
+import PropTypes from 'prop-types'
 
 const bulletinBoard = (props) => {
 
@@ -16,6 +17,13 @@ const bulletinBoard = (props) => {
         </div>
     );
 
+}
+
+bulletinBoard.propTypes = {
+    notes: PropTypes.array.isRequired,
+    delete: PropTypes.func.isRequired,
+    changed: PropTypes.func.isRequired,
+    updateZ: PropTypes.func.isRequired,
 }
 
 export default bulletinBoard;

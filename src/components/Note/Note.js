@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import classes from './Note.module.css'
 import { Rnd } from 'react-rnd'
 import CloseButton from '../UI/Button/EmojiButton/CloseButton/CloseButton'
+import PropTypes from 'prop-types'
 
 import { ReactComponent as Resize } from '../../assets/resize.svg'
 
@@ -67,6 +68,14 @@ const Note = (props) => {
             <Resize className={classes.resizeButton} />
         </Rnd>
     )
+}
+
+Note.propTypes = {
+    color: PropTypes.string.isRequired,
+    zIndex: PropTypes.number.isRequired,
+    updateZ: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
+    changed: PropTypes.func.isRequired,
 }
 
 export default Note;

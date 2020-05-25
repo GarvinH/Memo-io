@@ -2,6 +2,7 @@ import React from 'react'
 import Aux from '../../../hoc/Aux'
 import classes from './ChooseColor.module.css'
 import Color from './Color/Color'
+import PropTypes from 'prop-types'
 
 const chooseColor = (props) => {
     const COLORS_TOP = props.colorOptions.slice(0, Math.ceil(props.colorOptions.length/2))
@@ -21,6 +22,11 @@ const chooseColor = (props) => {
             </div>
         </Aux>
     )
+}
+
+chooseColor.propTypes = {
+    colorOptions: PropTypes.array.isRequired,
+    currentColor: PropTypes.string.isRequired,
 }
 
 export default chooseColor
