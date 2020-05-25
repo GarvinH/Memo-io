@@ -8,10 +8,10 @@ const Color = (props) => {
     const style = props.active? {backgroundColor: props.color, border: "5px #4D90FE solid"} : {backgroundColor: props.color}
 
     return (
-    <div className={classes.color} style={style} onClick={() => {
+    <button className={classes.color} style={style} onClick={() => {
         noteContext.changeColor(props.color)
     }}>
-    </div>)
+    </button>)
 }
 
 Color.propTypes = {

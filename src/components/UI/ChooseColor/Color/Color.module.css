@@ -3,9 +3,12 @@
     width: 10%;
     height: auto;
     padding-top: 10%;
+    border: none;
 }
 
-.color:hover {
+.color:hover,
+.color:focus {
     width: 11%;
     padding-top: 11%;
+    cursor: pointer;
 }

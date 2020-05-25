@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 
 const imageButton = (props) => (
     <div className={classes.Button}>
-        <img src={props.image} alt={props.alt} onClick={props.clicked} />
+        <button onClick={props.clicked} aria-label={props.label} title={props.title}>
+            <img src={props.image} alt={props.alt} aria-hidden="true"/>
+        </button>
     </div>
 )
 

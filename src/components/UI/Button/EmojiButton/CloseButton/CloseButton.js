@@ -4,9 +4,8 @@ import classes from './CloseButton.module.css';
 import PropTypes from 'prop-types'
 
 const closeButton = (props) => (
-    <div className={classes.closeButton}>
-        <EmojiButton clicked={props.clicked} label="close button" emoji="&#10060;" />
-    </div>
+    <EmojiButton className={classes.closeButton} clicked={props.clicked} 
+    label="Close modal" emoji="&#10060;" title="Close modal"/>
 )
 
 closeButton.propTypes = {

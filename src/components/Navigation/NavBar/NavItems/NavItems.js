@@ -8,8 +8,8 @@ const NavItems = (props) => {
 
     return (
     <ul className={classes.NavItems}>
-        <NavItem clicked={()=>noteContext.updateModal(1)}>LOGIN</NavItem>
-        <NavItem clicked={()=>noteContext.updateModal(2)}>SIGN UP</NavItem>
+        <NavItem clicked={()=>noteContext.updateModal(1)} ariaLabel="Login">LOGIN</NavItem>
+        <NavItem clicked={()=>noteContext.updateModal(2)} ariaLabel="Sign up">SIGN UP</NavItem>
     </ul>
 )}
 

@@ -4,6 +4,7 @@ import Backdrop from '../Backdrop/Backdrop'
 import Aux from '../../../hoc/Aux'
 import CloseButton from '../Button/EmojiButton/CloseButton/CloseButton'
 import PropTypes from 'prop-types'
+import FocusTrap from 'focus-trap-react'
 
 class Modal extends Component {
 
@@ -13,15 +14,19 @@ class Modal extends Component {
 
     render() {
         return (
+
             <Aux>
                 <Backdrop show={this.props.show} style={this.props.style} clicked={() => this.props.updateModal(0)} />
-                <div className={classes.modal} style={{ ...this.props.style, transform: (this.props.show === 0) ? "translateY(-100vh)" : "translateY(0)" }}>
-                    <div className={classes.closeButton}>
-                        <CloseButton clicked={() => this.props.updateModal(0)}/>
+                <FocusTrap active={this.props.show} focusTrapOptions={{clickOutsideDeactivates: true}}>
+                    <div className={classes.modal} style={{ ...this.props.style, transform: (this.props.show === 0) ? "translateY(-100vh)" : "translateY(0)" }}>
+                        <div className={classes.closeButton}>
+                            <CloseButton clicked={() => this.props.updateModal(0)} />
+                        </div>
+                        {this.props.children}
                     </div>
-                    {this.props.children}
-                </div>
-            </Aux>
+                </FocusTrap>
+            </Aux >
+
         )
     }
 }

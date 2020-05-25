@@ -8,7 +8,7 @@ import Login from './components/UI/Login/Login'
 import Registration from './components/UI/Registration/Registration'
 import ChooseColor from './components/UI/ChooseColor/ChooseColor'
 
-const COLOR_OPTIONS = ["yellow", "#ff7eb9", "#7afcff", "#dcff46", "#fbad4b"];
+const COLOR_OPTIONS = ["yellow", "#ff7eb9", "#7afcff", "#ADFF2F", "#fbad4b"];
 
 class App extends Component {
 

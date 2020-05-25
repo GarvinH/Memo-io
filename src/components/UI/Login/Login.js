@@ -7,9 +7,9 @@ const login = (props) => (
         <h1 className={classes.title}>Login</h1>
         <hr className={classes.hr}></hr>
         <form className={classes.login}>
-            <label for="email">Email:</label>
+            <label htmlFor="email">Email:</label>
             <input type="email" placeholder="Enter your email here"></input>
-            <label for="password">Password:</label>
+            <label htmlFor="password">Password:</label>
             <input type="password" placeholder="Enter your password here"></input>
             <input type="submit" value="Submit"></input>
         </form>
