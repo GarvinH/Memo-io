@@ -7,18 +7,30 @@ const registsration = (props) => (
         <h1 className={classes.title}>Sign Up</h1>
         <hr></hr>
         <form className={classes.signup}>
-            <label htmlFor="name">Name:</label>
-            <input type="text" placeholder="Your name here"></input>
-            <label htmlFor="email">Email:</label>
-            <input type="email" placeholder="Your email here"></input>
+            <label htmlFor="name">
+                Name:
+                <input type="text" placeholder="Your name here" />
+            </label>
+
+            <label htmlFor="email">
+                Email:
+                <input type="email" placeholder="Your email here" />
+            </label>
+
         </form>
         <form className={classes.signup}>
-            <label htmlFor="password">Password:</label>
-            <input type="password" placeholder="Your password here"></input>
-            <label htmlFor="confirm password">Confirm Password:</label>
-            <input type="password" placeholder="Confirm your password here"></input>
+            <label htmlFor="password">
+                Password:
+                <input type="password" placeholder="Your password here" />
+            </label>
+
+            <label htmlFor="confirm password">
+                Confirm Password:
+                <input type="password" placeholder="Confirm your password here" />
+            </label>
+
         </form>
-        <input className={classes.submit} type="submit" value="Submit"></input>
+        <input className={classes.submit} type="submit" value="Submit" />
     </Aux>
 )
 

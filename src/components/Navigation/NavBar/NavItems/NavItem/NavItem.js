@@ -2,9 +2,9 @@ import React from 'react';
 import classes from './NavItem.module.css'
 import PropTypes from 'prop-types'
 
-const navItem = (props) => (
+const navItem = ({ariaLable, clicked, children}) => (
     <li className={classes.NavItem} >
-        <button aria-label={props.ariaLable? props.ariaLable : null} onClick={props.clicked}>{props.children}</button>
+        <button aria-label={ariaLable === undefined ? ariaLable : null} onClick={clicked}>{children}</button>
     </li>
 )
 
