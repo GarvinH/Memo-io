@@ -10,7 +10,7 @@ import pallete from '../../../assets/pallete.png'
 import NoteContext from '../../../context/NoteContext'
 import Aux from '../../../hoc/Aux'
 
-const NavBar = (props) => {
+const NavBar = () => {
 
     const noteContext = useContext(NoteContext)
 

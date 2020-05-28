@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Login.module.css'
 import Aux from '../../../hoc/Aux'
 
-const login = (props) => (
+const login = () => (
     <Aux>
         <h1 className={classes.title}>Login</h1>
         <hr className={classes.hr}></hr>

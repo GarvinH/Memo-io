@@ -3,7 +3,7 @@ import NavItem from './NavItem/NavItem'
 import classes from './NavItems.module.css'
 import NoteContext from '../../../../context/NoteContext'
 
-const NavItems = (props) => {
+const NavItems = () => {
     const noteContext = useContext(NoteContext)
 
     return (

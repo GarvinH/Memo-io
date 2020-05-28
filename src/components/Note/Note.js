@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 import { ReactComponent as Resize } from '../../assets/resize.svg'
 
-const Note = (props) => {
+const Note = ({color, zIndex, updateZ, text, changed, deleted}) => {
 
     const textRef = useRef(null)
     const enableResize = {
@@ -37,7 +37,7 @@ const Note = (props) => {
             minWidth: 200
         }}
             className={classes.Note}
-            style={{ backgroundColor: props.color, zIndex: props.zIndex }}
+            style={{ backgroundColor: color, zIndex: zIndex }}
             onResize={(event, dir, ref) => {
                 if (parseInt(ref.style.width) < 200) {
                     ref.style.width = "200px";
@@ -47,24 +47,24 @@ const Note = (props) => {
                 }
             }}
             bounds="#root"
-            onDragStart={props.updateZ}
+            onDragStart={updateZ}
             onClick={() => {
                 textRef.current.focus()
             }}
             enableResizing={enableResize}
             resizeHandleStyles={handleStyle}
         >
-            <textarea type="text" ref={textRef} value={props.text}
-                style={{ backgroundColor: props.color }}
+            <textarea type="text" ref={textRef} value={text}
+                style={{ backgroundColor: color }}
                 className={classes.input}
-                onChange={props.changed} onMouseUp={() => {
+                onChange={changed} onMouseUp={() => {
                     textRef.current.blur()
                     textRef.current.focus()
                 }
                 }></textarea>
-            <div className={classes.closeButton}>
-                <CloseButton clicked={props.delete} />
-            </div>
+            <span className={classes.closeButton}>
+                <CloseButton clicked={deleted} />
+            </span>
             <Resize className={classes.resizeButton} />
         </Rnd>
     )
@@ -76,6 +76,7 @@ Note.propTypes = {
     updateZ: PropTypes.func.isRequired,
     text: PropTypes.string.isRequired,
     changed: PropTypes.func.isRequired,
+    deleted: PropTypes.func.isRequired,
 }
 
 export default Note;

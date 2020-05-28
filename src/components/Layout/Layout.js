@@ -3,11 +3,11 @@ import Aux from '../../hoc/Aux'
 import NavBar from '../Navigation/NavBar/NavBar'
 import classes from './Layout.module.css'
 
-const layout = (props) => (
+const layout = ({children}) => (
     <Aux>
         <NavBar />
         <main className={classes.Layout}>
-            {props.children}
+            {children}
         </main>
     </Aux>
 )

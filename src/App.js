@@ -86,7 +86,7 @@ class App extends Component {
           <Modal show={this.state.modalState} style={{zIndex: this.state.currentZIndex+100}} updateModal={this.updateModalState}>
             {modalOutput}
           </Modal>
-          <BulletinBoard notes={this.state.notes} delete={this.deleteNote} resize={this.resizeNote} changed={this.updateText} updateZ={this.updateZIndex}/>
+          <BulletinBoard notes={this.state.notes} deleted={this.deleteNote} resize={this.resizeNote} changed={this.updateText} updateZ={this.updateZIndex}/>
         </Layout>
       </ButtonContext.Provider>
     );
