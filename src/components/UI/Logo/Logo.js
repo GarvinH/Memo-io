@@ -21,12 +21,16 @@ const logo = (props) => (
           flip-side, you might need a lot of text to stand in for something like a diagram, for the purposes of 3. SEO juicers 
           will just cram search terms in an alt, and that's bad for both 2 and 3.
           
-          2 and 3 are easily reconciled thanks to the `longdesc` attribute, which exists specifically as a place to put longer
-          image descriptions intended for screen reader users. 1 is fine as a passive benefit of alt text, just keep in mind
-          that using alt text specifically for SEO will usually hurt users via 2 and 3.
+          ~2 and 3 are easily reconciled thanks to the `longdesc` attribute, which exists specifically as a place to put longer
+          image descriptions intended for screen reader users.~ EDIT: a) had the usage of longdesc wrong, b) it's been deprecated.
+          Guess if you want a longer description that doesn't get displayed when the image fails to load, you could stick it in
+          the `title` attribute (although then it becomes hover over text which may also be a headache in some cases).
+          
+          1 is fine as a passive benefit of alt text, just keep in mind that using alt text specifically for SEO will usually
+          hurt users via 2 and 3.
           
           All that said, "sticky note" is not very helpful alt text for any of those three goals. Probably something like
-          alt="Memo.io logo", maybe with a longdesc describing the logo, would be the most comprehensive.
+          alt="Memo.io logo", maybe with a ~longdesc~ longer title describing the logo, would be the most comprehensive.
 
 
           Addendum on accessibility:
