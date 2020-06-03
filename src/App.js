@@ -8,7 +8,7 @@ import Login from './components/UI/Login/Login'
 import Registration from './components/UI/Registration/Registration'
 import ChooseColor from './components/UI/ChooseColor/ChooseColor'
 
-const COLOR_OPTIONS = ["yellow", "#ff7eb9", "#7afcff", "#dcff46", "#fbad4b"];
+const COLOR_OPTIONS = ["yellow", "#ff7eb9", "#7afcff", "#ADFF2F", "#fbad4b"];
 
 class App extends Component {
 
@@ -86,7 +86,7 @@ class App extends Component {
           <Modal show={this.state.modalState} style={{zIndex: this.state.currentZIndex+100}} updateModal={this.updateModalState}>
             {modalOutput}
           </Modal>
-          <BulletinBoard notes={this.state.notes} delete={this.deleteNote} resize={this.resizeNote} changed={this.updateText} updateZ={this.updateZIndex}/>
+          <BulletinBoard notes={this.state.notes} deleted={this.deleteNote} resize={this.resizeNote} changed={this.updateText} updateZ={this.updateZIndex}/>
         </Layout>
       </ButtonContext.Provider>
     );

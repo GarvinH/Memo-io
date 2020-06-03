@@ -10,7 +10,7 @@ import pallete from '../../../assets/pallete.png'
 import NoteContext from '../../../context/NoteContext'
 import Aux from '../../../hoc/Aux'
 
-const NavBar = (props) => {
+const NavBar = () => {
 
     const noteContext = useContext(NoteContext)
 
@@ -22,8 +22,8 @@ const NavBar = (props) => {
             </div>
             <div className={classes.Button}>
                 <Aux>
-                    <ImageButton image={plus} alt="plus" clicked={noteContext.addNote} />
-                    <ImageButton image={pallete} alt="pallete" clicked={() => noteContext.updateModal(3)} />
+                    <ImageButton image={plus} alt="plus icon" clicked={noteContext.addNote} label="Add note" title="Add note"/>
+                    <ImageButton image={pallete} alt="pallete icon" clicked={() => noteContext.updateModal(3)} label="Change note colour" title="Change note colour" />
                 </Aux>
             </div>
             <nav>

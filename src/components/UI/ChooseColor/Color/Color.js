@@ -3,15 +3,15 @@ import classes from './Color.module.css'
 import NoteContext from '../../../../context/NoteContext'
 import PropTypes from 'prop-types'
 
-const Color = (props) => {
+const Color = ({active, color}) => {
     const noteContext = useContext(NoteContext);
-    const style = props.active? {backgroundColor: props.color, border: "5px #4D90FE solid"} : {backgroundColor: props.color}
+    const style = active? {backgroundColor: color, border: "5px #4D90FE solid"} : {backgroundColor: color}
 
     return (
-    <div className={classes.color} style={style} onClick={() => {
-        noteContext.changeColor(props.color)
+    <button className={classes.color} style={style} onClick={() => {
+        noteContext.changeColor(color)
     }}>
-    </div>)
+    </button>)
 }
 
 Color.propTypes = {

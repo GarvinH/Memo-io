@@ -2,16 +2,22 @@ import React from 'react';
 import classes from './Login.module.css'
 import Aux from '../../../hoc/Aux'
 
-const login = (props) => (
+const login = () => (
     <Aux>
         <h1 className={classes.title}>Login</h1>
         <hr className={classes.hr}></hr>
         <form className={classes.login}>
-            <label for="email">Email:</label>
-            <input type="email" placeholder="Enter your email here"></input>
-            <label for="password">Password:</label>
-            <input type="password" placeholder="Enter your password here"></input>
-            <input type="submit" value="Submit"></input>
+            <label htmlFor="email">
+                Email:
+                <input type="email" placeholder="Enter your email here" />
+            </label>
+
+            <label htmlFor="password">
+                Password:
+                <input type="password" placeholder="Enter your password here" />
+            </label>
+
+            <input type="submit" value="Submit" />
         </form>
     </Aux>
 )
