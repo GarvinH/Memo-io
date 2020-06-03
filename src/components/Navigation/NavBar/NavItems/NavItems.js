@@ -1,16 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux'
+import * as actionTypes from '../../../../store/actions'
 import NavItem from './NavItem/NavItem'
 import classes from './NavItems.module.css'
-import NoteContext from '../../../../context/NoteContext'
 
-const NavItems = () => {
-    const noteContext = useContext(NoteContext)
+const NavItems = ({updateModal}) => {
 
     return (
     <ul className={classes.NavItems}>
-        <NavItem clicked={()=>noteContext.updateModal(1)} ariaLabel="Login">LOGIN</NavItem>
-        <NavItem clicked={()=>noteContext.updateModal(2)} ariaLabel="Sign up">SIGN UP</NavItem>
+        <NavItem clicked={()=> updateModal(1)} ariaLabel="Login">LOGIN</NavItem>
+        <NavItem clicked={()=> updateModal(2)} ariaLabel="Sign up">SIGN UP</NavItem>
     </ul>
 )}
 
-export default NavItems;
+const mapDispatchToProps = dispatch => {
+    return {
+        updateModal: (newState) => dispatch({type: actionTypes.updateModal, newModalState: newState})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(NavItems);

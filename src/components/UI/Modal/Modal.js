@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import * as actionTypes from '../../../store/actions'
 import classes from './Modal.module.css'
 import Backdrop from '../Backdrop/Backdrop'
 import Aux from '../../../hoc/Aux'
@@ -9,16 +11,16 @@ import FocusTrap from 'focus-trap-react'
 class Modal extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.show !== this.props.show || this.props.children !== nextProps.children
+        return this.props.children !== nextProps.children
     }
 
     render() {
         return (
 
             <Aux>
-                <Backdrop show={this.props.show} style={this.props.style} clicked={() => this.props.updateModal(0)} />
-                <FocusTrap active={this.props.show} focusTrapOptions={{clickOutsideDeactivates: true}}>
-                    <div className={classes.modal} style={{ ...this.props.style, transform: (this.props.show === 0) ? "translateY(-100vh)" : "translateY(0)" }}>
+                <Backdrop show={this.props.modalState}  clicked={() => this.props.updateModal(0)} />
+                <FocusTrap active={this.props.modalState} focusTrapOptions={{clickOutsideDeactivates: true}}>
+                    <div className={classes.modal} style={{ zIndex: this.props.zIndex+100, transform: (this.props.modalState === 0) ? "translateY(-100vh)" : "translateY(0)"}}>
                         <div className={classes.closeButton}>
                             <CloseButton clicked={() => this.props.updateModal(0)} />
                         </div>
@@ -32,8 +34,21 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
-    show: PropTypes.number.isRequired,
-    style: PropTypes.object,
+    modalState: PropTypes.number.isRequired,
+    zIndex: PropTypes.number.isRequired
 }
 
-export default Modal;
+const mapStateToProps = state => {
+    return {
+        zIndex: state.currentZIndex,
+        modalState: state.modalState
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        updateModal: (newState) => dispatch({type: actionTypes.updateModal, newModalState: newState})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

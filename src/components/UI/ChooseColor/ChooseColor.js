@@ -1,12 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { COLOR_OPTIONS } from '../../../store/reducer'
 import Aux from '../../../hoc/Aux'
 import classes from './ChooseColor.module.css'
 import Color from './Color/Color'
 import PropTypes from 'prop-types'
 
-const chooseColor = ({colorOptions, currentColor}) => {
-    const COLORS_TOP = colorOptions.slice(0, Math.ceil(colorOptions.length/2))
-    const COLORS_BOTTOM = colorOptions.slice(Math.ceil(colorOptions.length/2), colorOptions.length)
+const chooseColor = ({currentColor}) => {
+    const COLORS_TOP = COLOR_OPTIONS.slice(0, Math.ceil(COLOR_OPTIONS.length/2))
+    const COLORS_BOTTOM = COLOR_OPTIONS.slice(Math.ceil(COLOR_OPTIONS.length/2), COLOR_OPTIONS.length)
 
     return (
         <Aux>
@@ -25,8 +27,13 @@ const chooseColor = ({colorOptions, currentColor}) => {
 }
 
 chooseColor.propTypes = {
-    colorOptions: PropTypes.array.isRequired,
     currentColor: PropTypes.string.isRequired,
 }
 
-export default chooseColor
+const mapStateToProps = state => {
+    return {
+        currentColor: state.currentColor
+    }
+}
+
+export default connect(mapStateToProps)(chooseColor)
