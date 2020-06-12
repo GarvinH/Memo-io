@@ -43,4 +43,5 @@ You will also see any lint errors in the console.
 ## Authors
 
 * **Garvin Hui** - [GarvinH](https://github.com/garvinh)
-* **Stephen O'Neil** - *Code Reviewer* - [Stephen-ONeil](https://github.com/Stephen-ONeil)
+
+Shoutout to **Stephen O'Neil** - [Stephen-ONeil](https://github.com/Stephen-ONeil) for reviewing my code!
