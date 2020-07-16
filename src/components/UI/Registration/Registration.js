@@ -6,11 +6,11 @@ import axios from "axios";
 const register = (event) => {
   event.preventDefault();
   console.log(event.target.name.value);
-  axios.post("/register", {
-    name: event.target.name.value,
-    email: event.target.email.value,
-    password: event.target.password.value,
-    confirm: event.target.confirm.value,
+  const data = new URLSearchParams()
+  data.append('email', event.target.email.value)
+  data.append('password', event.target.password.value)
+  axios.post("/register", data).then(res => {
+    console.log(res)
   });
 };
 
