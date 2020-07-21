@@ -3,7 +3,7 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
-const encrypt = require("mongoose-encryption");
+const aes256 = require("aes256");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require("express-session");
@@ -12,7 +12,7 @@ const port = process.env.PORT || 8080;
 const app = express();
 const publicPath = path.join(__dirname, "build");
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(publicPath));
 app.use(
   session({
@@ -32,15 +32,12 @@ mongoose.connect("mongodb://localhost:27017/userDB", {
 });
 
 const userSchema = new mongoose.Schema({
+  email: String,
+  password: String,
   notes: [{ text: String, color: String }],
 });
 
 userSchema.plugin(passportLocalMongoose);
-userSchema.plugin(encrypt, {
-  encryptionKey: process.env.ENC_KEY,
-  signingKey: process.env.SIGN_KEY,
-  encryptedFields: ["notes"],
-});
 const User = new mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
@@ -55,25 +52,43 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
+function save_data(req, res) {
+  if (req.isAuthenticated()) {
+  } else {
+  }
+}
+// const user = new User({
+//   username: 'asdf@asdf.com',
+//   password: 'test',
+//   notes: [{text: 'lol', color: 'red'}, {text: 'test', color:"white"}]
+// })
+
+// user.save()
+
 app.get("/", function (req, res) {
+  console.log(req.user);
   return res.sendFile(path.join(publicPath, "index.html"));
 });
 
+app.get("/test", function (req, res) {
+  if (req.isAuthenticated()) {
+    console.log(req.user);
+    res.send("hello");
+  }
+});
+
 app.post("/register", function (req, res) {
-  console.log(req.body)
-  User.register({ username: req.body.email }, req.body.password, function (
+  console.log(req.body);
+  User.register({ username: req.body.username }, req.body.password, function (
     err,
     user
   ) {
     if (err) {
       console.log(err);
     } else {
-      console.log("test")
-      const middleware = passport.authenticate("local", (req, res, function(){
-        res.status(200).send("authenticated");
-        console.log("success")
-      }));
-      middleware(req, res)
+      passport.authenticate("local")(req, res, function () {
+        res.send("authenticated");
+      });
     }
   });
 });
@@ -84,11 +99,24 @@ app.post("/login", function (req, res) {
     password: req.body.password,
   });
 
+  console.log(req.user);
+
   req.login(user, function (err) {
     if (err) {
       console.log(err);
     } else {
-      console.log;
+      passport.authenticate("local")(req, res, function (err, user, info) {
+        if (err) {
+          console.log(err);
+        }
+
+        if (user) {
+          req.user = user;
+          res.send(user.notes);
+        } else {
+          res.send(info);
+        }
+      });
     }
   });
 });

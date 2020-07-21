@@ -5,11 +5,10 @@ import axios from "axios";
 
 const register = (event) => {
   event.preventDefault();
-  console.log(event.target.name.value);
   const data = new URLSearchParams()
-  data.append('email', event.target.email.value)
+  data.append('username', event.target.username.value)
   data.append('password', event.target.password.value)
-  axios.post("/register", data).then(res => {
+  axios.post("/register", data, {withCredentials: true}).then(res => {
     console.log(res)
   });
 };
@@ -25,9 +24,9 @@ const registsration = () => (
           <input type="text" placeholder="Your name here" name="name" />
         </label>
 
-        <label htmlFor="email">
+        <label htmlFor="username">
           Email:
-          <input type="email" placeholder="Your email here" name="email" />
+          <input type="email" placeholder="Your email here" name="username" />
         </label>
       </div>
       <div className={classes.signup}>
