@@ -13,7 +13,6 @@ const app = express();
 const publicPath = path.join(__dirname, "build");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(publicPath));
 app.use(
   session({
     secret: process.env.COOKIE_ID,
@@ -66,9 +65,12 @@ function save_data(req, res) {
 // user.save()
 
 app.get("/", function (req, res) {
-  console.log(req.user);
+  console.log(req.user)
   return res.sendFile(path.join(publicPath, "index.html"));
 });
+
+app.use('/', express.static(publicPath));
+
 
 app.get("/test", function (req, res) {
   if (req.isAuthenticated()) {
@@ -94,29 +96,16 @@ app.post("/register", function (req, res) {
 });
 
 app.post("/login", function (req, res) {
-  const user = new User({
-    username: req.body.email,
-    password: req.body.password,
-  });
-
-  console.log(req.user);
-
-  req.login(user, function (err) {
+  passport.authenticate("local")(req, res, function (err, user, info) {
     if (err) {
       console.log(err);
-    } else {
-      passport.authenticate("local")(req, res, function (err, user, info) {
-        if (err) {
-          console.log(err);
-        }
+    }
 
-        if (user) {
-          req.user = user;
-          res.send(user.notes);
-        } else {
-          res.send(info);
-        }
-      });
+    if (user) {
+      req.user = user;
+      res.send(user.notes);
+    } else {
+      res.send(info);
     }
   });
 });
