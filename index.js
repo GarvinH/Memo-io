@@ -7,6 +7,7 @@ const aes256 = require("aes256");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require("express-session");
+const lodash = require("lodash");
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -53,9 +54,34 @@ passport.deserializeUser(function (id, done) {
 
 function save_data(req, res) {
   if (req.isAuthenticated()) {
+    const new_notes = _.map(req.body.notes, (note) => ({
+      ...note,
+      text: aes256.encrypt(process.env.ENC_KEY, note.text),
+    }));
+
+    User.updateOne({ _id: req.user.id }, { notes: new_notes }, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("success");
+      }
+    });
   } else {
+    console.log("shouldn't be reachable from front end");
   }
 }
+
+function get_data(req, res) {
+  if (req.isAuthenticated()) {
+    return _.map(req.user.notes, (note) => ({
+      ...note,
+      text: aes256.decrypt(process.env.ENC_KEY, note.text),
+    }));
+  } else {
+    console.log("shouldn't be reachable from front end");
+  }
+}
+
 // const user = new User({
 //   username: 'asdf@asdf.com',
 //   password: 'test',
@@ -65,12 +91,11 @@ function save_data(req, res) {
 // user.save()
 
 app.get("/", function (req, res) {
-  console.log(req.user)
+  console.log(req.user);
   return res.sendFile(path.join(publicPath, "index.html"));
 });
 
-app.use('/', express.static(publicPath));
-
+app.use("/", express.static(publicPath));
 
 app.get("/test", function (req, res) {
   if (req.isAuthenticated()) {
@@ -96,17 +121,8 @@ app.post("/register", function (req, res) {
 });
 
 app.post("/login", function (req, res) {
-  passport.authenticate("local")(req, res, function (err, user, info) {
-    if (err) {
-      console.log(err);
-    }
-
-    if (user) {
-      req.user = user;
-      res.send(user.notes);
-    } else {
-      res.send(info);
-    }
+  passport.authenticate("local")(req, res, function () {
+    res.send(req.user.notes);
   });
 });
 
