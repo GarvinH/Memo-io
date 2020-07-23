@@ -18,7 +18,7 @@ const login = () => (
         <h1 className={classes.title}>Login</h1>
         <hr className={classes.hr}></hr>
         <form className={classes.login} onSubmit={event => submit(event)}>
-            <label htmlFor="username">
+            <label htmlFor="email">
                 Email:
                 <input type="email" placeholder="Enter your email here" name="username"/>
             </label>

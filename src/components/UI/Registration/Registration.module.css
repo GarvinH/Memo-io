@@ -23,6 +23,7 @@ hr {
     float: left;
     height: 100%;
     flex-flow: column;
+    margin-top: 1.5rem;
 }
 
 .signup input,

@@ -21,7 +21,7 @@ const bulletinBoard = ({notes, changed, updateZ, deleted}) => {
 
 bulletinBoard.propTypes = {
     notes: PropTypes.array.isRequired,
-    delete: PropTypes.func.isRequired,
+    deleted: PropTypes.func.isRequired,
     changed: PropTypes.func.isRequired,
     updateZ: PropTypes.func.isRequired,
 }
