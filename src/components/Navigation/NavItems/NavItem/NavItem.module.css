@@ -6,6 +6,11 @@
     align-items: center;
     border-bottom: 0.1rem solid transparent;
     cursor: pointer;
+    justify-content: center;
+}
+
+.NavItem {
+    min-width: 6rem;
 }
 
 .NavItem:hover {

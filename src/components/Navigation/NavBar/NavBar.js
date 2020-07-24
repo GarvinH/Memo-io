@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import classes from './NavBar.module.css'
-import NavItems from '../../../containers/NavItems/NavItems'
+import NavItems from '../NavItems/NavItems'
 import Logo from '../../UI/Logo/Logo'
 import ImageButton from '../../UI/Button/ImageButton/ImageButton'
 

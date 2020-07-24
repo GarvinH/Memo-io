@@ -9,7 +9,6 @@ const register = (event, updateAuthenticated) => {
   data.append('username', event.target.username.value)
   data.append('password', event.target.password.value)
   axios.post("/register", data, {withCredentials: true}).then(res => {
-    updateAuthenticated()
   });
 };
 

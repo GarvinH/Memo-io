@@ -6,6 +6,10 @@ const noteContext = React.createContext({
   updateZIndex: () => {},
   updateModal: () => {},
   zIndex: 0,
+  isAuthenticated: false,
+  authenticate: () => {},
+  notes: [],
+  updateNotes: () => {}
 });
 
 export default noteContext;

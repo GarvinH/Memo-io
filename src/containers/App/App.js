@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import Layout from "../../components/Layout/Layout";
 import BulletinBoard from "../../components/BulletinBoard/BulletinBoard";
 import NoteContext from "../../context/NoteContext";
@@ -17,6 +18,7 @@ class App extends Component {
     currentZIndex: 0,
     notes: [],
     modalState: 0, //0 nothing, 1 login, 2 registration, 3 color chooser,
+    isAuthenticated: true,
   };
 
   addNewNote = () => {
@@ -65,6 +67,22 @@ class App extends Component {
     this.setState({ modalState: newState });
   };
 
+  authenticate = () => {
+    this.setState({ isAuthenticated: true });
+  };
+
+  updateNotes = (notes) => {
+    const id_notes = _.map(notes, (note, index) => {
+      return { ...note, iden: index + 1, zIndex: index };
+    });
+
+    this.setState({
+      notes: id_notes,
+      currentID: id_notes.length + 1,
+      zIndex: id_notes.length,
+    });
+  };
+
   modalSelector = () => {
     switch (this.state.modalState) {
       case 1:
@@ -94,6 +112,10 @@ class App extends Component {
           zIndex: this.state.currentZIndex,
           updateZIndex: this.updateZIndex,
           updateModal: this.updateModalState,
+          isAuthenticated: this.state.isAuthenticated,
+          authenticate: this.authenticate,
+          notes: this.state.notes,
+          updateNotes: this.updateNotes,
         }}
       >
         <Layout>
