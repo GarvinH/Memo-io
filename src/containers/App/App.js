@@ -18,7 +18,7 @@ class App extends Component {
     currentZIndex: 0,
     notes: [],
     modalState: 0, //0 nothing, 1 login, 2 registration, 3 color chooser,
-    isAuthenticated: true,
+    isAuthenticated: false,
   };
 
   addNewNote = () => {

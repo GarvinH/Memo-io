@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { noteFilterer } from '../../../functions/noteFunctions'
 import axios from "axios";
 import NavItem from "./NavItem/NavItem";
 import classes from "./NavItems.module.css";
@@ -20,12 +21,13 @@ const NavItems = () => {
 
   const authenticatedNav = (
     <ul className={classes.NavItems}>
-      <NavItem clicked={() => {axios.post("/save", noteContext.notes, {withCredentials: true})}} ariaLable="Save">
+      <NavItem clicked={() => {axios.post("/save", noteFilterer(noteContext.notes), {withCredentials: true})}} ariaLable="Save">
         SAVE
       </NavItem>
-      <NavItem clicked={() => {axios.post("/logout", noteContext.notes, {withCredentials: true})}} ariaLable="Log out">
+      <NavItem clicked={() => {axios.get("/logout", noteFilterer(noteContext.notes), {withCredentials: true})}} ariaLable="Log out">
         LOG OUT
       </NavItem>
+
     </ul>
   );
   return noteContext.isAuthenticated ? authenticatedNav : unauthenticatedNav;

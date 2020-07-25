@@ -31,10 +31,15 @@ mongoose.connect("mongodb://localhost:27017/userDB", {
   useCreateIndex: true,
 });
 
+const noteSchema = new mongoose.Schema({
+  text: String,
+  color: String,
+});
+
 const userSchema = new mongoose.Schema({
   email: String,
   password: String,
-  notes: [{ text: String, color: String }],
+  notes: [noteSchema],
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -97,31 +102,27 @@ app.get("/", function (req, res) {
 
 app.use("/", express.static(publicPath));
 
-app.get("/test", function (req, res) {
-  if (req.isAuthenticated()) {
-    console.log(req.user);
-    res.send("hello");
-  }
-});
-
 app.post("/register", function (req, res) {
   console.log(req.body);
-  User.register({ username: req.body.username }, req.body.password, function (
-    err,
-    user
-  ) {
-    if (err) {
-      console.log(err);
-    } else {
-      passport.authenticate("local")(req, res, function () {
-        res.send("authenticated");
-      });
+  User.register(
+    { username: req.body.username, notes: JSON.parse(req.body.notes) },
+    req.body.password,
+    function (err, user) {
+      if (err) {
+        console.log(err);
+      } else {
+        passport.authenticate("local")(req, res, function () {
+          res.send("authenticated");
+        });
+      }
     }
-  });
+  );
 });
 
 app.post("/login", function (req, res) {
+  console.log(req.body);
   passport.authenticate("local")(req, res, function () {
+    console.log(req.user);
     res.send(req.user.notes);
   });
 });
