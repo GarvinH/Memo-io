@@ -7,7 +7,7 @@ const aes256 = require("aes256");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require("express-session");
-const lodash = require("lodash");
+const _ = require("lodash");
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -57,34 +57,18 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-function save_data(req, res) {
-  if (req.isAuthenticated()) {
-    const new_notes = _.map(req.body.notes, (note) => ({
-      ...note,
-      text: aes256.encrypt(process.env.ENC_KEY, note.text),
-    }));
-
-    User.updateOne({ _id: req.user.id }, { notes: new_notes }, function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send("success");
-      }
-    });
-  } else {
-    console.log("shouldn't be reachable from front end");
-  }
+function encrypt_notes(notes) {
+  return _.map(notes, (note) => ({
+    ...note,
+    text: aes256.encrypt(process.env.ENC_KEY, note.text),
+  }));
 }
 
-function get_data(req, res) {
-  if (req.isAuthenticated()) {
-    return _.map(req.user.notes, (note) => ({
-      ...note,
-      text: aes256.decrypt(process.env.ENC_KEY, note.text),
-    }));
-  } else {
-    console.log("shouldn't be reachable from front end");
-  }
+function decrypt_notes(notes) {
+  return _.map(notes, (note) => ({
+    ...note._doc,
+    text: aes256.decrypt(process.env.ENC_KEY, note.text),
+  }));
 }
 
 // const user = new User({
@@ -105,13 +89,17 @@ app.use("/", express.static(publicPath));
 app.post("/register", function (req, res) {
   console.log(req.body);
   User.register(
-    { username: req.body.username, notes: JSON.parse(req.body.notes) },
+    {
+      username: req.body.username,
+      notes: encrypt_notes(JSON.parse(req.body.notes)),
+    },
     req.body.password,
     function (err, user) {
       if (err) {
         console.log(err);
       } else {
         passport.authenticate("local")(req, res, function () {
+          console.log(user);
           res.send("authenticated");
         });
       }
@@ -122,8 +110,7 @@ app.post("/register", function (req, res) {
 app.post("/login", function (req, res) {
   console.log(req.body);
   passport.authenticate("local")(req, res, function () {
-    console.log(req.user);
-    res.send(req.user.notes);
+    res.send(decrypt_notes(req.user.notes));
   });
 });
 
