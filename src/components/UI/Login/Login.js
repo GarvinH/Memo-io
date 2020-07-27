@@ -12,6 +12,7 @@ const submit = (event, noteContext) => {
     axios.post('/login', data, {withCredentials: true}).then(res => {
         noteContext.updateNotes(res.data)
         noteContext.updateModal(0)
+        noteContext.authenticate()
     }).catch(err => {
         console.log(err)
     })

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import _ from "lodash";
+import axios from "axios";
+
 import Layout from "../../components/Layout/Layout";
 import BulletinBoard from "../../components/BulletinBoard/BulletinBoard";
 import NoteContext from "../../context/NoteContext";
 import Modal from "../../components/UI/Modal/Modal";
-
 import Login from "../../components/UI/Login/Login";
 import Registration from "../../components/UI/Registration/Registration";
 import ChooseColor from "../../components/UI/ChooseColor/ChooseColor";
@@ -79,7 +80,7 @@ class App extends Component {
     this.setState({
       notes: id_notes,
       currentID: id_notes.length + 1,
-      zIndex: id_notes.length,
+      currentZIndex: id_notes.length,
     });
   };
 
@@ -100,6 +101,18 @@ class App extends Component {
         return null;
     }
   };
+
+  componentDidMount() {
+    axios
+      .post("/login", null, { withCredentials: true })
+      .then((res) => {
+        this.updateNotes(res.data);
+        this.authenticate();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     const modalOutput = this.modalSelector();

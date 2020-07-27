@@ -71,6 +71,20 @@ function decrypt_notes(notes) {
   }));
 }
 
+function save_notes(req, res) {
+  if (req.isAuthenticated()) {
+    User.updateOne({_id: req.user.id}, {notes: encrypt_notes(JSON.parse(req.body.notes))}, (err) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send("successs")
+      }
+    })
+  } else {
+    console.log("should not be possible");
+  }
+}
+
 // const user = new User({
 //   username: 'asdf@asdf.com',
 //   password: 'test',
@@ -84,10 +98,14 @@ app.get("/", function (req, res) {
   return res.sendFile(path.join(publicPath, "index.html"));
 });
 
+app.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/");
+});
+
 app.use("/", express.static(publicPath));
 
 app.post("/register", function (req, res) {
-  console.log(req.body);
   User.register(
     {
       username: req.body.username,
@@ -108,10 +126,21 @@ app.post("/register", function (req, res) {
 });
 
 app.post("/login", function (req, res) {
-  console.log(req.body);
-  passport.authenticate("local")(req, res, function () {
+  if (req.isAuthenticated()) {
     res.send(decrypt_notes(req.user.notes));
-  });
+  } else {
+    passport.authenticate("local")(req, res, function () {
+      res.send(decrypt_notes(req.user.notes));
+    });
+  }
 });
+
+app.post("/save", function (req, res) {
+  save_notes(req, res)
+});
+
+app.post("/logout", function (req, res) {
+  save_notes(req, res)
+})
 
 app.listen(port);

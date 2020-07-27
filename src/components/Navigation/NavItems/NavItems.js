@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { noteFilterer } from '../../../functions/noteFunctions'
+import { noteFilterer } from "../../../functions/noteFunctions";
 import axios from "axios";
 import NavItem from "./NavItem/NavItem";
 import classes from "./NavItems.module.css";
@@ -19,15 +19,32 @@ const NavItems = () => {
     </ul>
   );
 
+  const format_data = () => {
+    const data = new URLSearchParams();
+    data.append("notes", JSON.stringify(noteFilterer(noteContext.notes)));
+    return data;
+  };
+
   const authenticatedNav = (
     <ul className={classes.NavItems}>
-      <NavItem clicked={() => {axios.post("/save", noteFilterer(noteContext.notes), {withCredentials: true})}} ariaLable="Save">
+      <NavItem
+        clicked={() => {
+          axios.post("/save", format_data(), { withCredentials: true });
+        }}
+        ariaLable="Save"
+      >
         SAVE
       </NavItem>
-      <NavItem clicked={() => {axios.get("/logout", noteFilterer(noteContext.notes), {withCredentials: true})}} ariaLable="Log out">
+      <NavItem
+        clicked={() => {
+          axios.post("/logout", format_data(), { withCredentials: true }).then(() => {
+            window.location.href = "/logout"
+          });
+        }}
+        ariaLable="Log out"
+      >
         LOG OUT
       </NavItem>
-
     </ul>
   );
   return noteContext.isAuthenticated ? authenticatedNav : unauthenticatedNav;
