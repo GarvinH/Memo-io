@@ -3,7 +3,7 @@ import classes from "./Registration.module.css";
 import Aux from "../../../hoc/Aux";
 import axios from "axios";
 import NoteContext from "../../../context/NoteContext";
-import { noteFilterer } from '../../../functions/noteFunctions'
+import { noteFilterer } from "../../../functions/noteFunctions";
 
 const register = (event, updateAuthenticated, notes) => {
   event.preventDefault();
@@ -11,19 +11,27 @@ const register = (event, updateAuthenticated, notes) => {
   data.append("username", event.target.username.value);
   data.append("password", event.target.password.value);
   data.append("notes", JSON.stringify(notes));
-  axios.post("/register", data, { withCredentials: true }).then((res) => {});
+  axios
+    .post("/register", data, { withCredentials: true })
+    .then((res) => {})
+    .catch((err) => console.log(err.response));
 };
 
-const Registsration = (props) => {
-  const noteContext = React.useContext(NoteContext);
+class Registsration extends React.Component {
+  static contextType = NoteContext;
 
+  render() {
   return (
     <Aux>
       <h1 className={classes.title}>Sign Up</h1>
       <hr></hr>
       <form
         onSubmit={(event) =>
-          register(event, props.updateAuthenticated, noteFilterer(noteContext.notes))
+          register(
+            event,
+            this.props.updateAuthenticated,
+            noteFilterer(this.context.notes)
+          )
         }
       >
         <div className={classes.signup}>
@@ -53,7 +61,7 @@ const Registsration = (props) => {
         <input className={classes.submit} type="submit" value="Submit" />
       </form>
     </Aux>
-  );
+  );}
 };
 
 export default Registsration;

@@ -1,43 +1,77 @@
-import React, { useContext } from 'react';
-import classes from './Login.module.css'
-import Aux from '../../../hoc/Aux'
-import axios from 'axios'
-import NoteContext from '../../../context/NoteContext'
+import React from "react";
+import classes from "./Login.module.css";
+import Aux from "../../../hoc/Aux";
+import axios from "axios";
+import NoteContext from "../../../context/NoteContext";
+import ErrorText from "../../UI/ErrorText/ErrorText";
 
-const submit = (event, noteContext) => {
-    event.preventDefault()
+class Login extends React.Component {
+  static contextType = NoteContext;
+
+  state = {
+    email: "",
+    password: "",
+    err: {},
+  };
+
+  submit = (event) => {
+    event.preventDefault();
     const data = new URLSearchParams();
-    data.append('username', event.target.username.value)
-    data.append('password', event.target.password.value)
-    axios.post('/login', data, {withCredentials: true}).then(res => {
-        noteContext.updateNotes(res.data)
-        noteContext.updateModal(0)
-        noteContext.authenticate()
-    }).catch(err => {
-        console.log(err)
-    })
-}
+    data.append("username", event.target.username.value);
+    data.append("password", event.target.password.value);
+    axios
+      .post("/login", data, { withCredentials: true })
+      .then((res) => {
+        this.context.updateNotes(res.data);
+        this.context.updateModal(0);
+        this.context.authenticate();
+      })
+      .catch((err) => {
+        this.setState({ err: err.response });
+      });
+  };
 
-const Login = () => {
-    const noteContext = useContext(NoteContext)
+  render() {
     return (
-    <Aux>
+      <Aux>
         <h1 className={classes.title}>Login</h1>
         <hr className={classes.hr}></hr>
-        <form className={classes.login} onSubmit={event => submit(event, noteContext)}>
-            <label htmlFor="email">
-                Email:
-                <input type="email" placeholder="Enter your email here" name="username"/>
-            </label>
+        <form
+          className={classes.login}
+          onSubmit={(event) => this.submit(event)}
+        >
+          <label htmlFor="email">
+            Email:
+            <input
+              type="email"
+              placeholder="Enter your email here"
+              name="username"
+              onChange={(event) => this.setState({ email: event.target.value })}
+            />
+          </label>
 
-            <label htmlFor="password">
-                Password:
-                <input type="password" placeholder="Enter your password here" name="password"/>
-            </label>
+          <label htmlFor="password">
+            Password:
+            <input
+              type="password"
+              placeholder="Enter your password here"
+              name="password"
+              onChange={(event) =>
+                this.setState({ password: event.target.value })
+              }
+            />
+          </label>
+          <ErrorText
+            email={this.state.email}
+            password={this.state.password}
+            err={this.state.err}
+          />
 
-            <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" />
         </form>
-    </Aux>
-)}
+      </Aux>
+    );
+  }
+}
 
 export default Login;

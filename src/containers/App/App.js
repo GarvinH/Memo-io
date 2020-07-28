@@ -108,10 +108,7 @@ class App extends Component {
       .then((res) => {
         this.updateNotes(res.data);
         this.authenticate();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      }).catch(err => {return})
   }
 
   render() {
