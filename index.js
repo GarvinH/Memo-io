@@ -89,14 +89,6 @@ function save_notes(req, res) {
   }
 }
 
-// const user = new User({
-//   username: 'asdf@asdf.com',
-//   password: 'test',
-//   notes: [{text: 'lol', color: 'red'}, {text: 'test', color:"white"}]
-// })
-
-// user.save()
-
 app.get("/", function (req, res) {
   console.log(req.user);
   return res.sendFile(path.join(publicPath, "index.html"));
@@ -121,7 +113,6 @@ app.post("/register", function (req, res) {
         console.log(err);
       } else {
         passport.authenticate("local")(req, res, function () {
-          console.log(user);
           res.send("authenticated");
         });
       }

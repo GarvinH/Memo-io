@@ -19,11 +19,11 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40%;
+    /* width: 40%; -> 2 signup columns of width 40% = 80%*/
+    width: 80%;
     float: left;
     height: 100%;
     flex-flow: column;
-    margin-top: 1.5rem;
 }
 
 .signup input,
@@ -53,11 +53,8 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     width: 40%;
     height: 10%;
-    left: calc(60% - 20% - 1rem);
-    top: calc(80% - 5%);
     background-color: #28a745;
     color: white;
     border-radius: 5px;

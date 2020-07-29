@@ -17,7 +17,7 @@ class Registsration extends React.Component {
     update_err: false
   };
 
-  register = (event, updateAuthenticated) => {
+  register = (event) => {
     event.preventDefault();
     if (event.target.password.value === event.target.confirm.value) {
       const data = new URLSearchParams();
@@ -48,7 +48,7 @@ class Registsration extends React.Component {
       <Aux>
         <h1 className={classes.title}>Sign Up</h1>
         <hr></hr>
-        <form onSubmit={(event) => this.register(event)}>
+        <form style={{height: "100%"}} onSubmit={(event) => this.register(event)}>
           <div className={classes.signup}>
             <label htmlFor="email">
               Email:
@@ -87,7 +87,7 @@ class Registsration extends React.Component {
             <ErrorText {...this.state} disable_update_err={this.disable_update_err} />
             <input className={classes.submit} type="submit" value="Submit" />
           </div>
-          <div className={classes.signup}></div>
+          {/* <div className={classes.signup}></div> */}
         </form>
       </Aux>
     );
