@@ -2,11 +2,9 @@ import React from "react";
 import classes from "./Login.module.css";
 import Aux from "../../../hoc/Aux";
 import axios from "axios";
-import NoteContext from "../../../context/NoteContext";
 import ErrorText from "../../UI/ErrorText/ErrorText";
 
 class Login extends React.Component {
-  static contextType = NoteContext;
 
   state = {
     email: "",
@@ -22,9 +20,9 @@ class Login extends React.Component {
     axios
       .post("/login", data, { withCredentials: true })
       .then((res) => {
-        this.context.updateNotes(res.data);
-        this.context.updateModal(0);
-        this.context.authenticate();
+        this.props.updateNotes(res.data);
+        this.props.updateModal(0);
+        this.props.authenticate();
       })
       .catch((err) => {
         this.setState({ err: err.response });
@@ -62,9 +60,7 @@ class Login extends React.Component {
             />
           </label>
           <ErrorText
-            email={this.state.email}
-            password={this.state.password}
-            err={this.state.err}
+            {...this.state}
           />
 
           <input type="submit" value="Submit" />

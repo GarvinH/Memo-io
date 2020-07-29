@@ -73,13 +73,17 @@ function decrypt_notes(notes) {
 
 function save_notes(req, res) {
   if (req.isAuthenticated()) {
-    User.updateOne({_id: req.user.id}, {notes: encrypt_notes(JSON.parse(req.body.notes))}, (err) => {
-      if (err) {
-        console.log(err)
-      } else {
-        res.send("successs")
+    User.updateOne(
+      { _id: req.user.id },
+      { notes: encrypt_notes(JSON.parse(req.body.notes)) },
+      (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send("successs");
+        }
       }
-    })
+    );
   } else {
     console.log("should not be possible");
   }
@@ -136,11 +140,11 @@ app.post("/login", function (req, res) {
 });
 
 app.post("/save", function (req, res) {
-  save_notes(req, res)
+  save_notes(req, res);
 });
 
 app.post("/logout", function (req, res) {
-  save_notes(req, res)
-})
+  save_notes(req, res);
+});
 
 app.listen(port);

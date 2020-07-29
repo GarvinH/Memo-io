@@ -85,11 +85,19 @@ class App extends Component {
   };
 
   modalSelector = () => {
+    const authentication_options = {
+      authenticate: this.authenticate,
+      updateModal: this.updateModalState,
+    };
     switch (this.state.modalState) {
       case 1:
-        return <Login />;
+        return (
+          <Login {...authentication_options} updateNotes={this.updateNotes} />
+        );
       case 2:
-        return <Registration />;
+        return (
+          <Registration {...authentication_options} notes={this.state.notes} />
+        );
       case 3:
         return (
           <ChooseColor
@@ -108,7 +116,10 @@ class App extends Component {
       .then((res) => {
         this.updateNotes(res.data);
         this.authenticate();
-      }).catch(err => {return})
+      })
+      .catch((err) => {
+        return;
+      });
   }
 
   render() {
@@ -123,9 +134,7 @@ class App extends Component {
           updateZIndex: this.updateZIndex,
           updateModal: this.updateModalState,
           isAuthenticated: this.state.isAuthenticated,
-          authenticate: this.authenticate,
           notes: this.state.notes,
-          updateNotes: this.updateNotes,
         }}
       >
         <Layout>
