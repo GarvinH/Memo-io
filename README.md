@@ -1,5 +1,8 @@
-# Sticky Notes
+# Memo.io
 A front-end only take on a sticky note web application.
+
+## Trying it out
+Go visit https://memo-io.herokuapp.com/ and try out my app!
 
 ## Getting Started
 
@@ -26,8 +29,9 @@ npm i
 The setup should be complete and you should now be able to run the app in development mode.
 
 ```
-npm start
+npm start   
 ```
+Note: make sure in package.json that npm start is set to "react-scripts start" and not "node index.js"
 
 If the page doesn't open on its own, open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
@@ -38,7 +42,12 @@ You will also see any lint errors in the console.
 * [ReactJS](https://reactjs.org/docs/getting-started.html) - The JavaScript library used
 * [ReactRnD](https://github.com/bokuweb/react-rnd) - React component that is resizable and draggable
 * [Focus Trap React](https://github.com/davidtheclark/focus-trap-react) - React component that traps focus for keyboard navigation
-* [Redux](https://redux.js.org/introduction/getting-started) - JavaScript state container (implemented only in the reduxify branch)
+* [Redux](https://redux.js.org/introduction/getting-started) - JavaScript state container (implemented only in the reduxify branch, and will no longer be updated)
+* [Heroku](https://www.heroku.com/what) - Hosts the server to this webapp!
+* [MongoDB](https://www.mongodb.com/what-is-mongodb) - Stores all the data to this webapp!
+* [Mongoose](https://mongoosejs.com/docs/guide.html) - Makes using MongoDB that much easier
+* [PassportJS](http://www.passportjs.org/) - Handles login, registration, and logout
+* [aes256](https://www.npmjs.com/package/aes256) - Encrypts and decrypts all notes stored
 
 ## Authors
 
