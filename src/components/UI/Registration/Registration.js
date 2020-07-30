@@ -19,7 +19,9 @@ class Registsration extends React.Component {
 
   register = (event) => {
     event.preventDefault();
-    if (event.target.password.value === event.target.confirm.value) {
+    if (!event.target.email.value || !event.target.password.value) {
+      this.setState({update_err: true, err: "Email or password missing"})
+    } else if (event.target.password.value === event.target.confirm.value) {
       const data = new URLSearchParams();
       data.append("username", event.target.email.value);
       data.append("password", event.target.password.value);
