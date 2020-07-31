@@ -5,6 +5,7 @@ import axios from "axios";
 import NoteContext from "../../../context/NoteContext";
 import { noteFilterer } from "../../../functions/noteFunctions";
 import ErrorText from "../../UI/ErrorText/ErrorText";
+import Spinner from "../Spinner/Spinner"
 
 class Registsration extends React.Component {
   static contextType = NoteContext;
@@ -14,43 +15,47 @@ class Registsration extends React.Component {
     password: "",
     confirm_password: "",
     err: {},
-    update_err: false
+    update_err: false,
+    loading: false,
   };
 
   register = (event) => {
     event.preventDefault();
-    if (!event.target.email.value || !event.target.password.value) {
-      this.setState({update_err: true, err: "Email or password missing"})
-    } else if (event.target.password.value === event.target.confirm.value) {
+    if (this.state.password === this.state.confirm_password) {
       const data = new URLSearchParams();
-      data.append("username", event.target.email.value);
-      data.append("password", event.target.password.value);
+      data.append("username", this.state.email);
+      data.append("password", this.state.password);
       data.append("notes", JSON.stringify(noteFilterer(this.props.notes)));
+      this.setState({loading: true})
       axios
         .post("/register", data, { withCredentials: true })
         .then((res) => {
           this.props.updateModal(0);
           this.props.authenticate();
         })
-        .catch((err) => this.setState({ err: err.response, update_err: true }));
+        .catch((err) => this.setState({ err: err.response, update_err: true }))
+        .finally(() => this.setState({loading: false}));
     } else {
       this.setState({
         err: "Passwords do not match. Please fix and try again.",
-        update_err: true
+        update_err: true,
       });
     }
   };
 
   disable_update_err = () => {
-    this.setState({update_err: false})
-  }
+    this.setState({ update_err: false });
+  };
 
   render() {
     return (
       <Aux>
         <h1 className={classes.title}>Sign Up</h1>
         <hr></hr>
-        <form style={{height: "100%"}} onSubmit={(event) => this.register(event)}>
+        <form
+          style={{ height: "100%" }}
+          onSubmit={(event) => this.register(event)}
+        >
           <div className={classes.signup}>
             <label htmlFor="email">
               Email:
@@ -86,8 +91,12 @@ class Registsration extends React.Component {
                 }
               />
             </label>
-            <ErrorText {...this.state} disable_update_err={this.disable_update_err} />
+            <ErrorText
+              {...this.state}
+              disable_update_err={this.disable_update_err}
+            />
             <input className={classes.submit} type="submit" value="Submit" />
+            <Spinner loading={this.state.loading} />
           </div>
           {/* <div className={classes.signup}></div> */}
         </form>

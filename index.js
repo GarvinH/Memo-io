@@ -90,7 +90,6 @@ function save_notes(req, res) {
 }
 
 app.get("/", function (req, res) {
-  console.log(req.user);
   return res.sendFile(path.join(publicPath, "index.html"));
 });
 
@@ -110,7 +109,11 @@ app.post("/register", function (req, res) {
     req.body.password,
     function (err, user) {
       if (err) {
-        console.log(err);
+        err.message =
+          err.name === "UserExistsError"
+            ? "A user with that email is already registered."
+            : err.message;
+        res.status(401).send(err);
       } else {
         passport.authenticate("local")(req, res, function () {
           res.send("authenticated");

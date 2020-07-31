@@ -23,7 +23,7 @@ class ErrorText extends React.Component {
       } else if (err) {
         if (!_.isString(err)) {
           if (err.status === 401) {
-            return "Email or password is incorrect. Please try again.";
+            return err.data.message || "Email or password is incorrect. Please try again.";
           } else {
             return "An error has occured. Please try again later.";
           }

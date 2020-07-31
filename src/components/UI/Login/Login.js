@@ -3,6 +3,7 @@ import classes from "./Login.module.css";
 import Aux from "../../../hoc/Aux";
 import axios from "axios";
 import ErrorText from "../../UI/ErrorText/ErrorText";
+import Spinner from "../Spinner/Spinner";
 
 class Login extends React.Component {
   state = {
@@ -10,28 +11,24 @@ class Login extends React.Component {
     password: "",
     err: {},
     update_err: false,
+    loading: false,
   };
 
   submit = (event) => {
     event.preventDefault();
-    if (!event.target.email.value || !event.target.password.value) {
-      this.setState({ err: "Email or password not provided", update_err: true });
-    } else {
-      const data = new URLSearchParams();
-      data.append("username", event.target.email.value);
-      data.append("password", event.target.password.value);
-      axios
-        .post("/login", data, { withCredentials: true })
-        .then((res) => {
-          this.props.updateNotes(res.data);
-          this.props.updateModal(0);
-          this.props.authenticate();
-        })
-        .catch((err) => {
-          console.log(err.response)
-          this.setState({ err: err.response, update_err: true });
-        });
-    }
+    const data = new URLSearchParams();
+    data.append("username", this.state.email);
+    data.append("password", this.state.password);
+    this.setState({ loading: true });
+    axios
+      .post("/login", data, { withCredentials: true })
+      .then((res) => {
+        this.props.updateNotes(res.data);
+        this.props.updateModal(0);
+        this.props.authenticate();
+      })
+      .catch((err) => this.setState({ err: err.response, update_err: true }))
+      .finally(() => this.setState({ loading: false }));
   };
 
   disable_update_err = () => {
@@ -74,6 +71,7 @@ class Login extends React.Component {
           />
 
           <input type="submit" value="Submit" />
+          <Spinner loading={this.state.loading} />
         </form>
       </Aux>
     );
