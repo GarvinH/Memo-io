@@ -8,9 +8,9 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require("express-session");
 const _ = require("lodash");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const findOrCreate = require('mongoose-findorcreate')
-
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
+const findOrCreate = require("mongoose-findorcreate");
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -44,10 +44,11 @@ const userSchema = new mongoose.Schema({
   password: String,
   notes: [noteSchema],
   googleId: String,
+  facebookId: String,
 });
 
 userSchema.plugin(passportLocalMongoose);
-userSchema.plugin(findOrCreate)
+userSchema.plugin(findOrCreate);
 const User = new mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
@@ -62,17 +63,35 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_ID,
-  clientSecret: process.env.GOOGLE_SECRET,
-  callbackURL: "http://localhost:8080/auth/google/callback",
-},
-function(accessToken, refreshToken, profile, cb) {
-  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    return cb(err, user);
-  });
-}
-));
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+      callbackURL: "http://localhost:8080/auth/google/callback",
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      User.findOrCreate({ googleId: profile.id }, function (err, user) {
+        return cb(err, user);
+      });
+    }
+  )
+);
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET,
+      callbackURL: "http://localhost:8080/auth/facebook/callback",
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+        return cb(err, user);
+      });
+    }
+  )
+);
 
 function encrypt_notes(notes) {
   return _.map(notes, (note) => ({
@@ -115,14 +134,28 @@ app.get("/logout", function (req, res) {
   res.redirect("/");
 });
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile'] }));
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
 
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  function (req, res) {
+    res.redirect("/");
+  }
+);
+
+app.get("/auth/facebook", passport.authenticate("facebook"));
+
+app.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", { failureRedirect: "/" }),
+  function (req, res) {
+    res.redirect("/");
+  }
+);
 
 app.use("/", express.static(publicPath));
 

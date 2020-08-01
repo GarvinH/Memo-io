@@ -100,6 +100,7 @@ class Registsration extends React.Component {
           </div>
           <div className={classes.signup}>
             <a href="/auth/google" role="button">Sign in with Google</a>
+            <a href="/auth/facebook" role="button">Sign in with Facebook</a>
           </div>
         </form>
       </Aux>
