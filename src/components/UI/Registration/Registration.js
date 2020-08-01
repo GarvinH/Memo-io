@@ -98,7 +98,9 @@ class Registsration extends React.Component {
             <input className={classes.submit} type="submit" value="Submit" />
             <Spinner loading={this.state.loading} />
           </div>
-          {/* <div className={classes.signup}></div> */}
+          <div className={classes.signup}>
+            <a href="/auth/google" role="button">Sign in with Google</a>
+          </div>
         </form>
       </Aux>
     );

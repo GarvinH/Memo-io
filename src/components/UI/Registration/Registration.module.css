@@ -20,7 +20,7 @@ hr {
     justify-content: center;
     align-items: center;
     /* width: 40%; -> 2 signup columns of width 40% = 80%*/
-    width: 80%;
+    width: 40%;
     float: left;
     height: 100%;
     flex-flow: column;
