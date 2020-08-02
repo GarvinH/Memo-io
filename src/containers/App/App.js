@@ -6,8 +6,7 @@ import Layout from "../../components/Layout/Layout";
 import BulletinBoard from "../../components/BulletinBoard/BulletinBoard";
 import NoteContext from "../../context/NoteContext";
 import Modal from "../../components/UI/Modal/Modal";
-import Login from "../../components/UI/Login/Login";
-import Registration from "../../components/UI/Registration/Registration";
+import Authentication from "../../components/UI/Authentication/Authentication";
 import ChooseColor from "../../components/UI/ChooseColor/ChooseColor";
 
 const COLOR_OPTIONS = ["yellow", "#ff7eb9", "#7afcff", "#ADFF2F", "#fbad4b"];
@@ -92,11 +91,11 @@ class App extends Component {
     switch (this.state.modalState) {
       case 1:
         return (
-          <Login {...authentication_options} updateNotes={this.updateNotes} />
+          <Authentication {...authentication_options} updateNotes={this.updateNotes} login={true} />
         );
       case 2:
         return (
-          <Registration {...authentication_options} notes={this.state.notes} />
+          <Authentication {...authentication_options} notes={this.state.notes} login={false}/>
         );
       case 3:
         return (

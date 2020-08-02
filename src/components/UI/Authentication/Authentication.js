@@ -1,19 +1,25 @@
 import React from "react";
-import classes from "./Registration.module.css";
+import classes from "./Authentication.module.css";
 import Aux from "../../../hoc/Aux";
 import axios from "axios";
 import NoteContext from "../../../context/NoteContext";
 import { noteFilterer } from "../../../functions/noteFunctions";
-import ErrorText from "../../UI/ErrorText/ErrorText";
+import ErrorText from "../ErrorText/ErrorText";
 import Spinner from "../Spinner/Spinner";
 
 class Registsration extends React.Component {
   static contextType = NoteContext;
 
+  constructor(props) {
+    super(props);
+    if (props.login !== false) {
+      this.setState({ confirm_password: "" });
+    }
+  }
+
   state = {
     email: "",
     password: "",
-    confirm_password: "",
     err: {},
     update_err: false,
     loading: false,
@@ -43,6 +49,23 @@ class Registsration extends React.Component {
     }
   };
 
+  submit = (event) => {
+    event.preventDefault();
+    const data = new URLSearchParams();
+    data.append("username", this.state.email);
+    data.append("password", this.state.password);
+    this.setState({ loading: true });
+    axios
+      .post("/login", data, { withCredentials: true })
+      .then((res) => {
+        this.props.updateNotes(res.data);
+        this.props.updateModal(0);
+        this.props.authenticate();
+      })
+      .catch((err) => this.setState({ err: err.response, update_err: true }))
+      .finally(() => this.setState({ loading: false }));
+  };
+
   disable_update_err = () => {
     this.setState({ update_err: false });
   };
@@ -50,10 +73,16 @@ class Registsration extends React.Component {
   render() {
     return (
       <Aux>
-        <h1 className={classes.title}>Sign Up</h1>
+        <h1 className={classes.title}>
+          {this.props.login === false ? "Sign Up" : "Login"}
+        </h1>
         <form
           style={{ height: "100%" }}
-          onSubmit={(event) => this.register(event)}
+          onSubmit={(event) =>
+            this.props.login === false
+              ? this.register(event)
+              : this.submit(event)
+          }
         >
           <div className={classes.signup}>
             <label htmlFor="email">
@@ -79,17 +108,19 @@ class Registsration extends React.Component {
               />
             </label>
 
-            <label htmlFor="confirm">
-              Confirm Password:
-              <input
-                type="password"
-                placeholder="Confirm your password here"
-                name="confirm"
-                onChange={(event) =>
-                  this.setState({ confirm_password: event.target.value })
-                }
-              />
-            </label>
+            {this.props.login ? null : (
+              <label htmlFor="confirm">
+                Confirm Password:
+                <input
+                  type="password"
+                  placeholder="Confirm your password here"
+                  name="confirm"
+                  onChange={(event) =>
+                    this.setState({ confirm_password: event.target.value })
+                  }
+                />
+              </label>
+            )}
             <ErrorText
               {...this.state}
               disable_update_err={this.disable_update_err}
