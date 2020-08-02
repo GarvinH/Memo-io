@@ -5,7 +5,7 @@ import axios from "axios";
 import NoteContext from "../../../context/NoteContext";
 import { noteFilterer } from "../../../functions/noteFunctions";
 import ErrorText from "../../UI/ErrorText/ErrorText";
-import Spinner from "../Spinner/Spinner"
+import Spinner from "../Spinner/Spinner";
 
 class Registsration extends React.Component {
   static contextType = NoteContext;
@@ -26,7 +26,7 @@ class Registsration extends React.Component {
       data.append("username", this.state.email);
       data.append("password", this.state.password);
       data.append("notes", JSON.stringify(noteFilterer(this.props.notes)));
-      this.setState({loading: true})
+      this.setState({ loading: true });
       axios
         .post("/register", data, { withCredentials: true })
         .then((res) => {
@@ -34,7 +34,7 @@ class Registsration extends React.Component {
           this.props.authenticate();
         })
         .catch((err) => this.setState({ err: err.response, update_err: true }))
-        .finally(() => this.setState({loading: false}));
+        .finally(() => this.setState({ loading: false }));
     } else {
       this.setState({
         err: "Passwords do not match. Please fix and try again.",
@@ -51,7 +51,6 @@ class Registsration extends React.Component {
     return (
       <Aux>
         <h1 className={classes.title}>Sign Up</h1>
-        <hr></hr>
         <form
           style={{ height: "100%" }}
           onSubmit={(event) => this.register(event)}
@@ -99,8 +98,22 @@ class Registsration extends React.Component {
             <Spinner loading={this.state.loading} />
           </div>
           <div className={classes.signup}>
-            <a href="/auth/google" role="button">Sign in with Google</a>
-            <a href="/auth/facebook" role="button">Sign in with Facebook</a>
+            <a
+              class="btn btn-block btn-social btn-google m-4 w-75"
+              href="/auth/google"
+              role="button"
+            >
+              <i style={{ height: "100%" }} class="fab fa-google"></i>Sign in
+              with Google
+            </a>
+            <a
+              class="btn btn-block btn-social btn-facebook m-4 w-75"
+              href="/auth/facebook"
+              role="button"
+            >
+              <i style={{ height: "100%" }} class="fab fa-facebook-f"></i>Sign
+              in with Facebook{" "}
+            </a>
           </div>
         </form>
       </Aux>
