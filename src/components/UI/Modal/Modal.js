@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classes from './Modal.module.css'
 import Backdrop from '../Backdrop/Backdrop'
 import Aux from '../../../hoc/Aux'
-import CloseButton from '../Button/EmojiButton/CloseButton/CloseButton'
+import CloseButton from '../Button/CloseButton/CloseButton'
 import PropTypes from 'prop-types'
 import FocusTrap from 'focus-trap-react'
 

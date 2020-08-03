@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import classes from './Note.module.css'
 import { Rnd } from 'react-rnd'
-import CloseButton from '../UI/Button/EmojiButton/CloseButton/CloseButton'
+import CloseButton from '../UI/Button/CloseButton/CloseButton'
 import PropTypes from 'prop-types'
 
 import { ReactComponent as Resize } from '../../assets/resize.svg'
