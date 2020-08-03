@@ -20,7 +20,7 @@ class Modal extends Component {
                 <FocusTrap active={this.props.show} focusTrapOptions={{clickOutsideDeactivates: true}}>
                     <div className={classes.modal} style={{ ...this.props.style, transform: (this.props.show === 0) ? "translateY(-100vh)" : "translateY(0)" }}>
                         <div className={classes.closeButton}>
-                            <CloseButton clicked={() => this.props.updateModal(0)} />
+                            <CloseButton clicked={() => this.props.updateModal(0)} label="Close modal" title="Close modal" />
                         </div>
                         {this.props.children}
                     </div>

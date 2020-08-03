@@ -63,7 +63,7 @@ const Note = ({color, zIndex, updateZ, text, changed, deleted}) => {
                 }
                 }></textarea>
             <span className={classes.closeButton}>
-                <CloseButton clicked={deleted} />
+                <CloseButton clicked={deleted} label="Close note" title="Close note"/>
             </span>
             <Resize className={classes.resizeButton} />
         </Rnd>
