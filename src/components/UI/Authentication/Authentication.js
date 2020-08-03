@@ -129,6 +129,7 @@ class Registsration extends React.Component {
             <Spinner loading={this.state.loading} />
           </div>
           <div className={classes.signup}>
+            <h4>Your email and password will not be saved if you login with a third party.</h4>
             <a
               class="btn btn-block btn-social btn-google m-4 w-75"
               href="/auth/google"

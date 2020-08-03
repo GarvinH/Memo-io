@@ -40,6 +40,10 @@
     width: 70%;
 }
 
+.signup h4 {
+    margin: 0.5rem 2rem;
+}
+
 .submit {
     font-size: large;
     margin: 1rem;   
