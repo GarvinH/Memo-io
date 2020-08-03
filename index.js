@@ -126,7 +126,7 @@ function save_notes(req, res) {
 }
 
 app.get("/", function (req, res) {
-  return res.sendFile(path.join(publicPath, "index.html"));
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 app.get("/logout", function (req, res) {

@@ -29,10 +29,18 @@ npm i
 The setup should be complete and you should now be able to run the app in development mode.
 
 ```
-npm start   
+npm run react_start   
 ```
-Note: make sure in package.json that npm start is set to "react-scripts start" and not "node index.js" if you wish to run a static version of the site.
-Instead of port 8080, the website will now run on 3000.
+
+If the page doesn't open on its own, open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
+
+
+To run with a local server
+```
+npm run start
+```
 
 Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
