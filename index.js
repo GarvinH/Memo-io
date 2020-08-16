@@ -47,7 +47,9 @@ const userSchema = new mongoose.Schema({
   facebookId: String,
 });
 
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose, {
+  usernameUnique: false,
+});
 userSchema.plugin(findOrCreate);
 const User = new mongoose.model("User", userSchema);
 
