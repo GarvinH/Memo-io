@@ -128,7 +128,21 @@ function save_notes(req, res) {
 }
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(publicPath, "index.html"));
+  User.collection.indexExists("username_1", function (err, result) {
+    if (result) {
+      User.collection.dropIndex("username_1", function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Index dropped!");
+          res.sendFile(path.join(publicPath, "index.html"));
+        }
+      });
+    } else {
+      console.log("No index");
+      res.sendFile(path.join(publicPath, "index.html"));
+    }
+  });
 });
 
 app.get("/logout", function (req, res) {
