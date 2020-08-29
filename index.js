@@ -73,9 +73,12 @@ passport.use(
       callbackURL: "https://memo-io.herokuapp.com/auth/google/callback",
     },
     function (accessToken, refreshToken, profile, cb) {
-      User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        return cb(err, user);
-      });
+      User.findOrCreate(
+        { username: `google_${profile.id}`, googleId: profile.id },
+        function (err, user) {
+          return cb(err, user);
+        }
+      );
     }
   )
 );
@@ -88,9 +91,12 @@ passport.use(
       callbackURL: "https://memo-io.herokuapp.com/auth/facebook/callback",
     },
     function (accessToken, refreshToken, profile, cb) {
-      User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-        return cb(err, user);
-      });
+      User.findOrCreate(
+        { username: `facebook_${profile.id}`, facebookId: profile.id },
+        function (err, user) {
+          return cb(err, user);
+        }
+      );
     }
   )
 );
@@ -128,21 +134,7 @@ function save_notes(req, res) {
 }
 
 app.get("/", function (req, res) {
-  User.collection.indexExists("username_1", function (err, result) {
-    if (result) {
-      User.collection.dropIndex("username_1", function (err, result) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Index dropped!");
-          res.sendFile(path.join(publicPath, "index.html"));
-        }
-      });
-    } else {
-      console.log("No index");
-      res.sendFile(path.join(publicPath, "index.html"));
-    }
-  });
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 app.get("/logout", function (req, res) {
