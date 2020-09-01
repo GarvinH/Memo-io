@@ -1,5 +1,5 @@
 # Memo.io
-A front-end only take on a sticky note web application.
+A sticky note web application now supporting user accounts locally and with OAuth!
 
 ## Trying it out
 Go visit https://memo-io.herokuapp.com/ and try out my app!
