@@ -53,6 +53,7 @@ before attempting to run npm start. The server will not reflect changes on its o
 ## Built With
 
 * [ReactJS](https://reactjs.org/docs/getting-started.html) - The JavaScript library used
+* [ExpressJS](https://expressjs.com/) - Web framework for handling the server
 * [ReactRnD](https://github.com/bokuweb/react-rnd) - React component that is resizable and draggable
 * [Focus Trap React](https://github.com/davidtheclark/focus-trap-react) - React component that traps focus for keyboard navigation
 * [Redux](https://redux.js.org/introduction/getting-started) - JavaScript state container (implemented only in the reduxify branch, and will no longer be updated)
