@@ -27,7 +27,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-rnd": "^10.1.10",
-    "react-scripts": "^3.4.3"
+    "react-scripts": "^4.0.1"
   },
   "scripts": {
     "predeploy": "npm run build",
